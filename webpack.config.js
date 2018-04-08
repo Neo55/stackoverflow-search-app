@@ -15,6 +15,7 @@ module.exports = {
           loader: "babel-loader"
         }
       },
+      { test: /\.css$/, loader: "style-loader!css-loader" },
       {
         test: /\.scss$/,
         use: [
@@ -28,6 +29,55 @@ module.exports = {
             loader: "sass-loader" // compiles Sass to CSS
           }
         ]
+      },
+      {
+        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url-loader",
+        query: {
+          limit: 10000,
+          mimetype: "application/font-woff",
+          name: "fonts/[name].[ext]"
+        }
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url-loader",
+        query: {
+          limit: "10000",
+          mimetype: "application/octet-stream",
+          name: "fonts/[name].[ext]"
+        }
+      },
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "file-loader",
+        query: {
+          name: "fonts/[name].[ext]"
+        }
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "svg-url-loader",
+        query: {
+          limit: "10000",
+          mimetype: "application/svg+xml",
+          name: "img/[name].[ext]"
+        }
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: "url-loader",
+        query: {
+          limit: 8192,
+          name: "img/[name].[ext]"
+        }
+      },
+      {
+        test: /\.ico(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url-loader",
+        query: {
+          name: "img/[name].[ext]"
+        }
       }
     ]
   },
