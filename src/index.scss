@@ -2,6 +2,10 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import "../node_modules/mdbreact/dist/css/mdb.css";
 
+body, html { /// take all available height
+  height: 100%;
+}
+
 .text-block {
   background-color: aquamarine;
 }
