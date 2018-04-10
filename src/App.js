@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import "./App.scss";
 import { connect } from "react-redux";
+import { Router, Route, Link, Switch } from "react-router-dom";
+import createBrowserHistory from "history/createBrowserHistory";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "mdbreact";
 import MainSearchScreen from "./components/MainSearchScreen";
+import ResultSearchScreen from "./components/ResultSearchScreen";
+
+const history = createBrowserHistory();
 
 class App extends Component {
   constructor(props) {
@@ -20,13 +25,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="row main-screen">
-        <div className="col-md-3" />
-        <div className="col-md-6 main-search-screen">
-          <MainSearchScreen />
-        </div>
-        <div className="col-md-3" />
-      </div>
+      <Router history={history}>
+        <Switch>
+          <Route path="/" component={MainSearchScreen} />
+          <Route path="/result/screen" component={ResultSearchScreen} />
+        </Switch>
+      </Router>
     );
   }
 }
