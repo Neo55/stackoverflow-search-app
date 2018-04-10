@@ -6,6 +6,7 @@ import createBrowserHistory from "history/createBrowserHistory";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "mdbreact";
 import MainSearchScreen from "./components/MainSearchScreen";
 import ResultSearchScreen from "./components/ResultSearchScreen";
+import AdditionSearchScreen from "./components/AdditionSearchScreen";
 
 const history = createBrowserHistory();
 
@@ -26,10 +27,19 @@ class App extends Component {
   render() {
     return (
       <Router history={history}>
-        <Switch>
-          <Route path="/" component={MainSearchScreen} />
-          <Route path="/result/screen" component={ResultSearchScreen} />
-        </Switch>
+        <div>
+              <Switch>
+                <Route path='/main' component={MainSearchScreen} />
+                <Route path='/result' component={ResultSearchScreen}/>
+                <Route path='/info' component={AdditionSearchScreen}/>
+              </Switch>
+        </div>
+
+        {/*<Switch>*/}
+          {/*<Route path="/" component={ResultSearchScreen} />*/}
+          {/*<Route path="/" component={AdditionSearchScreen} />*/}
+          {/*<Route path="/dfs" component={MainSearchScreen} />*/}
+        {/*</Switch>*/}
       </Router>
     );
   }
