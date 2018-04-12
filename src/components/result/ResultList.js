@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ListGroup, ListGroupItem } from "mdbreact";
-//import SearchBox from "./search/SearchBox";
+//import SearchBox from "./search-box/SearchBox";
 
 export default class ResultScreen extends Component {
   render() {

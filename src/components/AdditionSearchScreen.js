@@ -1,7 +1,15 @@
 import React, { Component } from "react";
-import SearchBox from "./search/SearchBox";
+import SearchBox from "./search-box/SearchBox";
 import ResultList from "./result/ResultList";
-import { Input, Button, Card, CardBody, CardImage, CardTitle, CardText } from "mdbreact";
+import {
+  Input,
+  Button,
+  Card,
+  CardBody,
+  CardImage,
+  CardTitle,
+  CardText
+} from "mdbreact";
 // import
 //import "./AdditionSearchScreen.scss";
 
@@ -23,7 +31,10 @@ export default class AdditionSearchScreen extends Component {
             </CardImage>
             <CardBody>
               <CardTitle>Card title</CardTitle>
-              <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+              <CardText>
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </CardText>
               <Button href="#">Button</Button>
             </CardBody>
           </Card>

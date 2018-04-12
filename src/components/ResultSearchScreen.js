@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SearchBox from "./search/SearchBox";
+import SearchBox from "./search-box/SearchBox";
 import ResultList from "./result/ResultList";
 import { Input, Button } from "mdbreact";
 // import

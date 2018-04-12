@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Router, Route, Link, Switch } from "react-router-dom";
 import createBrowserHistory from "history/createBrowserHistory";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "mdbreact";
-import MainSearchScreen from "./components/MainSearchScreen";
+import SearchScreen from "./containers/search-screen/SearchScreen";
 import ResultSearchScreen from "./components/ResultSearchScreen";
 import AdditionSearchScreen from "./components/AdditionSearchScreen";
 
@@ -28,17 +28,17 @@ class App extends Component {
     return (
       <Router history={history}>
         <div>
-              <Switch>
-                <Route path='/main' component={MainSearchScreen} />
-                <Route path='/result' component={ResultSearchScreen}/>
-                <Route path='/info' component={AdditionSearchScreen}/>
-              </Switch>
+          <Switch>
+            <Route path="/" component={SearchScreen} />
+            <Route path="/result" component={ResultSearchScreen} />
+            <Route path="/info" component={AdditionSearchScreen} />
+          </Switch>
         </div>
 
         {/*<Switch>*/}
-          {/*<Route path="/" component={ResultSearchScreen} />*/}
-          {/*<Route path="/" component={AdditionSearchScreen} />*/}
-          {/*<Route path="/dfs" component={MainSearchScreen} />*/}
+        {/*<Route path="/" component={ResultSearchScreen} />*/}
+        {/*<Route path="/" component={AdditionSearchScreen} />*/}
+        {/*<Route path="/dfs" component={SearchScreen} />*/}
         {/*</Switch>*/}
       </Router>
     );
@@ -47,7 +47,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    currentScreen: state.searchQuestions.searchWindow
+    currentScreen: state.search.searchWindow
   };
 }
 
