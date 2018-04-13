@@ -16,9 +16,10 @@ export default class SearchBox extends Component {
         <div className="col-md-8 ">
           <Input
             id="search-input"
-            ref="inputSearchText"
+            onKeyPress={this.handleKeyPress}
             label="Введите текст для поиска"
-            //label="Type you text here"
+            //value={this.props.searchTextValue}
+            onChange={this.onSearchInputChange}
             icon="search"
             className="input search"
           />
@@ -36,7 +37,17 @@ export default class SearchBox extends Component {
     );
   }
 
+  handleKeyPress = event => {
+    if (event.key == "Enter") {
+      this.onClickSearchButton();
+    }
+  };
+
   onClickSearchButton() {
-    this.props.onSearch("searchText");
+    this.props.onSearch();
+  }
+
+  onSearchInputChange(e) {
+    this.props.onSearchTextChange(e.target.value);
   }
 }

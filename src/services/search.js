@@ -3,10 +3,21 @@ import axios from "axios";
 const configuration = require("./configuration");
 
 class SearchService {
-  getTestData() {
+  search(searchText) {
     return configuration.get(
-      "search?((&site=stackoverflow&order=desc&sort=activity&intitle=extjs&filter=default"
-     // "/2.2/search?page=1&pagesize=10&order=desc&sort=activity&intitle=extjs&site=stackoverflow"
+      `search?((&site=stackoverflow&order=desc&sort=activity&intitle=${searchText}&filter=default`
+    );
+  }
+
+  getPopularQuestionByAuthor(authorId) {
+    return configuration.get(
+      `users/${authorId}/favorites?((&order=desc&sort=activity&site=stackoverflow`
+    );
+  }
+
+  getPopularQuestionByTag(tag) {
+    return configuration.get(
+      `questions?((&order=desc&sort=activity&tagged=${tag}&site=stackoverflow`
     );
   }
 }

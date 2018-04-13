@@ -15,21 +15,31 @@ class SearchScreen extends Component {
       <div className="row main-screen">
         <div className="col-md-3" />
         <div className="col-md-6 main-search-screen">
-          <SearchBox onSearch={this.onStartSearch} />
+          <SearchBox
+            onSearch={this.onStartSearch}
+            onSearchTextChange={this.onSearchTextChange}
+          />
         </div>
         <div className="col-md-3" />
       </div>
     );
   }
 
-  onStartSearch() {
-    this.props.dispatch(searchActions.startSearch("fromScreen"));
+  onStartSearch(searchText, context) {
+    this.props.history.push("/result");
+
+    this.props.dispatch(searchActions.startSearch());
+  }
+
+  onSearchTextChange(text) {
+    this.props.dispatch(searchActions.changeSearchText(text));
   }
 }
 
 function mapStateToProps(state) {
   return {
-    text: state.search
+    text: state.text,
+    result: []
   };
 }
 

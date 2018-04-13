@@ -5,7 +5,7 @@ import { Router, Route, Link, Switch } from "react-router-dom";
 import createBrowserHistory from "history/createBrowserHistory";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "mdbreact";
 import SearchScreen from "./containers/search-screen/SearchScreen";
-import ResultSearchScreen from "./components/ResultSearchScreen";
+import ResultScreen from "./containers/result-screen/ResultScreen";
 import AdditionSearchScreen from "./components/AdditionSearchScreen";
 
 const history = createBrowserHistory();
@@ -29,8 +29,8 @@ class App extends Component {
       <Router history={history}>
         <div>
           <Switch>
-            <Route path="/" component={SearchScreen} />
-            <Route path="/result" component={ResultSearchScreen} />
+            <Route exact path="/" component={SearchScreen} />
+            <Route path="/result" component={ResultScreen} />
             <Route path="/info" component={AdditionSearchScreen} />
           </Switch>
         </div>
