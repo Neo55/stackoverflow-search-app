@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Table, Badge, Spinner } from "mdbreact";
 import autoBind from "react-autobind";
+import {Animated} from "react-animated-css";
 import "./ResultList.scss";
 
 export default class ResultScreen extends Component {
@@ -22,28 +23,33 @@ export default class ResultScreen extends Component {
           </tr>
         </thead>
         <tbody>
+
           {this.props.result.map(item => (
-            <tr key={item.question_id}>
-              <td scope="row">
-                <div onClick={e => this.clickAuthor(item.owner.user_id)}>
-                  <img
-                    className="author-icon"
-                    src={item.owner.profile_image}
-                    alt=""
-                  />
-                  <p>{item.owner.user_id}</p>
-                </div>
-              </td>
-              <td>{item.title}</td>
-              <td>{item.answer_count}</td>
-              <td>
-                {item.tags.map(tag => {
-                  <h6>
-                    <Badge color="indigo">{tag}</Badge>
-                  </h6>;
-                })}
-              </td>
-            </tr>
+
+              <tr key={item.question_id}>
+                <Animated animationIn="fadeIn" animationOut="tada" isVisible={true}>
+                <td scope="row">
+                  <div onClick={e => this.clickAuthor(item.owner.user_id)}>
+                    <img
+                      className="author-icon"
+                      src={item.owner.profile_image}
+                      alt=""
+                    />
+                    <p>{item.owner.user_id}</p>
+                  </div>
+                </td>
+                <td>{item.title}</td>
+                <td>{item.answer_count}</td>
+                <td>
+                  {item.tags.map(tag => {
+                    <h6>
+                      <Badge color="indigo">{tag}</Badge>
+                    </h6>;
+                  })}
+                </td>
+                </Animated>
+              </tr>
+
           ))}
         </tbody>
       </Table>
