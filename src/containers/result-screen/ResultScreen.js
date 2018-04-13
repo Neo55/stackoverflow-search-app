@@ -6,6 +6,7 @@ import { Input, Button } from "mdbreact";
 import * as searchActions from "../../store/search/actions";
 import autoBind from "react-autobind";
 import { connect } from "react-redux";
+import {Animated} from "react-animated-css";
 import "./ResultScreen.scss";
 
 class ResultScreen extends Component {
@@ -19,16 +20,20 @@ class ResultScreen extends Component {
         <div className="row content">
           <div className="menu col-md-1" />
           <div className="search col-md-10">
-            <SearchBox
-              className="serach-box result-list"
-              onSearch={this.onStartSearch}
-              //searchTextValue={this.props.text}
-              onSearchTextChange={this.onSearchTextChange}
-            />
-            <ResultList
-              result={this.props.result}
-              selectAuthor={this.selectCurrentAuthor}
-            />
+            <Animated animationIn="slideInDown" animationOut="zoomOut" isVisible={this.props.mainSearchScreen}>
+              <SearchBox
+                className="serach-box result-list"
+                onSearch={this.onStartSearch}
+                //searchTextValue={this.props.text}
+                onSearchTextChange={this.onSearchTextChange}
+              />
+            </Animated>
+            <Animated animationIn="slideInRight" animationOut="tada" isVisible={true}>
+              <ResultList
+                result={this.props.result}
+                selectAuthor={this.selectCurrentAuthor}
+              />
+            </Animated>
           </div>
           <div className="info col-md-2">
             <AdditionInfo popularQuestion={this.props.popularQuestion} />
