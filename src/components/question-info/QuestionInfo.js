@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Table, Badge, Spinner } from "mdbreact";
 import autoBind from "react-autobind";
+import { Table, Badge, Spinner } from "mdbreact";
 import Crouton from "react-crouton";
-import "./AdditionInfo.scss";
+import "./QuestionInfo.scss";
 
-export default class AdditionInfo extends Component {
+export default class QuestionInfo extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -23,11 +23,12 @@ export default class AdditionInfo extends Component {
           // listener: function() {}
         }
       ],
-      hidden: this.props.popularQuestion.length === 0,
+      hidden: this.props.popularAnswers.length === 0,
       timeout: 2000
     };
+
     return (
-      <div className="addition-info">
+      <div className="question-info">
         {/* <Crouton
           id={data.id}
           type={data.type}
@@ -38,33 +39,26 @@ export default class AdditionInfo extends Component {
           timeout={data.timeout}
           autoMiss={data.autoMiss}
         > */}
-        <div className="title addition-table">
+        {/* <p>Самые ответы на вопрос: {this.props.questionTitle} </p> */}
+        <div className="title question-info-table">
           <p>
-            Самые популярные вопросы по {this.props.selectPopularType}:{" "}
-            {this.props.popularSelectName}{" "}
+            Самые популярные вопросы по
+            {/* {this.props.selectPopularType}:{" "} */}
+            {/* {this.props.popularSelectName}{" "} */}
           </p>
         </div>
-
         <Table className="table table-striped">
           <thead>
             <tr>
-              <th>Тема</th>
-              <th>Ответов</th>
-              <th>Теги</th>
+              <th style={{ width: 20 + "%" }}>Автор</th>
+              <th style={{ width: 80 + "%" }}>Ответ</th>
             </tr>
           </thead>
           <tbody>
-            {this.props.popularQuestion.map(item => (
-              <tr key={item.question_id}>
-                <td>{item.title}</td>
+            {this.props.popularAnswers.map(item => (
+              <tr key={item.answer_id}>
+                <td>{item.owner.user_id}</td>
                 <td>{item.answer_count}</td>
-                <td>
-                  {item.tags.map(tag => {
-                    <h6>
-                      <Badge color="indigo">{tag}</Badge>
-                    </h6>;
-                  })}
-                </td>
               </tr>
             ))}
           </tbody>
@@ -72,9 +66,5 @@ export default class AdditionInfo extends Component {
         {/* </Crouton> */}
       </div>
     );
-  }
-
-  renderLoading() {
-    return <Spinner big multicolor />;
   }
 }

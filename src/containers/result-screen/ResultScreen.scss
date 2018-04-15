@@ -1,0 +1,36 @@
+.container-result-screen {
+  padding: 15px;
+  .row.content {
+    .menu.col-md-3 {
+      margin-top: 125px;
+      padding-right: 0;
+    }
+    .search.col-md-6 {
+      .row.search-box {
+        padding: 0;
+      }
+    }
+    .result-screen.result-list {
+      height: 800px;
+      overflow: scroll;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: #f5f5f5;
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+      background-color: #f5f5f5;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #4285f4;
+    }
+    .info.col-md-3 {
+      margin-top: 125px;
+      padding-left: 0;
+    }
+  }
+}

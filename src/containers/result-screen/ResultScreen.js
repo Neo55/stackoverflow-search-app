@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import SearchBox from "../../components/search-box/SearchBox";
 import ResultList from "../../components/result/ResultList";
 import AdditionInfo from "../../components/addition-info/AdditionInfo";
+import QuestionInfoScreen from "../question-info-screen/QuestionInfoScreen";
 import { Input, Button } from "mdbreact";
 import * as searchActions from "../../store/search/actions";
+import * as additionInfoActions from "../../store/addition-info/actions";
 import autoBind from "react-autobind";
 import { connect } from "react-redux";
-import {Animated} from "react-animated-css";
+import { Animated } from "react-animated-css";
 import "./ResultScreen.scss";
 
 class ResultScreen extends Component {
@@ -16,11 +18,21 @@ class ResultScreen extends Component {
   }
   render() {
     return (
-      <div className="container">
+      <div className="container-result-screen">
         <div className="row content">
-          <div className="menu col-md-1" />
-          <div className="search col-md-10">
-            <Animated animationIn="slideInDown" animationOut="zoomOut" isVisible={this.props.mainSearchScreen}>
+          <div className="menu col-md-3">
+            <QuestionInfoScreen
+              className="question-info-screen"
+              popularAnswers={this.props.popularAnswers}
+              questionTitle={this.props}
+            />
+          </div>
+          <div className="search col-md-6">
+            <Animated
+              animationIn="slideInDown"
+              animationOut="zoomOut"
+              isVisible={this.props.mainSearchScreen}
+            >
               <SearchBox
                 className="serach-box result-list"
                 onSearch={this.onStartSearch}
@@ -28,19 +40,40 @@ class ResultScreen extends Component {
                 onSearchTextChange={this.onSearchTextChange}
               />
             </Animated>
-            <Animated animationIn="slideInRight" animationOut="tada" isVisible={true}>
-              <ResultList
-                result={this.props.result}
-                selectAuthor={this.selectCurrentAuthor}
-              />
+
+            <Animated
+              animationIn="slideInUp"
+              animationOut="tada"
+              //isVisible={this.isVisibleResultTable()}
+            >
+              <div className="result-screen result-list">
+                <ResultList
+                  result={this.props.result}
+                  selectAuthor={this.selectCurrentAuthor}
+                  showPopularAnswers={this.loadPopularAnswer}
+                  getUserName={this.getUserNameById}
+                  authorName="name"
+                  showQuestionInfo="false"
+                />
+              </div>
             </Animated>
           </div>
-          <div className="info col-md-2">
-            <AdditionInfo popularQuestion={this.props.popularQuestion} />
+          <div className="info col-md-3">
+            <Animated
+              animationIn="slideInRight"
+              animationOut="tada"
+              //isVisible={this.isVisibleResultTable()}
+            >
+              <AdditionInfo popularQuestion={this.props.popularQuestion} />
+            </Animated>
           </div>
         </div>
       </div>
     );
+  }
+
+  isVisibleResultTable() {
+    return this.props.result.length === 0;
   }
 
   onStartSearch(searchText, context) {
@@ -56,6 +89,16 @@ class ResultScreen extends Component {
   selectCurrentAuthor(authorId) {
     this.props.dispatch(searchActions.searchPopularQuestionByAuthor(authorId));
   }
+
+  loadPopularAnswer() {
+    this.props.dispatch(additionInfoActions.getPopularQuestionAnswer());
+  }
+
+  getUserNameById(userId) {
+    this.props.dispatch(additionInfoActions.getAuthorName(userId));
+    //debugger;
+    return this.state;
+  }
 }
 
 function mapStateToProps(state) {
@@ -63,7 +106,12 @@ function mapStateToProps(state) {
     text: state.search.text,
     result: state.search.result,
     popularQuestion: state.search.popularQuestion,
-    currentAuthor: state.search.currentAuthor
+    currentAuthor: state.search.currentAuthor,
+    selectPopularType: state.search.selectPopularType,
+    popularSelectName: state.search.popularSelectName,
+    authorName: state.search.authorName,
+    isShowQuestionInfo: state.search.isShowQuestionInfo,
+    popularAnswers: state.additionInfo.popularAnswers
   };
 }
 

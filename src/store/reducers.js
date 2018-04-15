@@ -1,9 +1,6 @@
 import { combineReducers } from "redux";
 import search from "./search/reducer";
 import animate from "./animate/reducer";
+import additionInfo from "./addition-info/reducer";
 
-// const reducers = combineReducers({ search });
-
-// export default reducers;
-
-export { search, animate };
+export { search, animate, additionInfo };

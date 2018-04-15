@@ -7,6 +7,7 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "mdbreact";
 import SearchScreen from "./containers/search-screen/SearchScreen";
 import ResultScreen from "./containers/result-screen/ResultScreen";
 import AdditionSearchScreen from "./components/AdditionSearchScreen";
+import QuestionInfoScreen from "./containers/question-info-screen/QuestionInfoScreen";
 
 const history = createBrowserHistory();
 
@@ -32,6 +33,7 @@ class App extends Component {
             <Route exact path="/" component={SearchScreen} />
             <Route path="/result" component={ResultScreen} />
             <Route path="/info" component={AdditionSearchScreen} />
+            <Route path="/question" component={QuestionInfoScreen} />
           </Switch>
         </div>
 

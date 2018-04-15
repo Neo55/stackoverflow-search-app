@@ -1,4 +1,4 @@
-.addition-info {
+.question-info {
   box-shadow: inset -1px 0px 10px 0px #ababab, 0px 1px 7px -14px #dddddd;
   -webkit-box-shadow: inset -1px 0px 10px 0px #ababab, 0px 1px 7px -14px #dddddd;
   -moz-box-shadow: inset -1px 0px 10px 0px #ababab, 0px 1px 7px -14px #dddddd;
@@ -6,7 +6,7 @@
   height: 400px;
   overflow: scroll;
   overflow-x: hidden;
-  .title.addition-table {
+  .title.question-info-table {
     height: 50px;
     background-color: #64b5f6;
     color: #ffffff;
@@ -16,16 +16,6 @@
   .table.table-striped {
     thead tr {
       text-align: center;
-    }
-    // tbody tr:nth-child(odd) td,
-    // tbody tr:nth-child(odd) th {
-    //   background-color: #f97777;
-    // }
-    // tbody tr:nth-child(odd) {
-    //   background-color: #f97777 !important;
-    // }
-    tbody tr:nth-of-type(odd) {
-      background-color: #f97777 !important;
     }
   }
 }

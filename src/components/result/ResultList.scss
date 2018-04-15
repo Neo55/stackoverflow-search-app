@@ -1,4 +1,15 @@
 .author-icon {
   width: 64px;
   border-radius: 50%;
+  text-align: center;
+}
+
+.div.coursor {
+  cursor: pointer;
+}
+
+.table.table-striped {
+  thead tr {
+    text-align: center;
+  }
 }
