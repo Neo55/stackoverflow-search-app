@@ -18,7 +18,7 @@ export default class SearchBox extends Component {
             id="search-input"
             onKeyPress={this.handleKeyPress}
             label="Введите текст для поиска"
-            //value={this.props.searchTextValue}
+            defaultValue={this.props.searchText}
             onChange={this.onSearchInputChange}
             icon="search"
             className="input search"
@@ -28,7 +28,7 @@ export default class SearchBox extends Component {
           <Button
             color="primary"
             className="button search"
-            onClick={this.onClickSearchButton}
+            onClick={e => this.onClickSearchButton()}
           >
             Найти
           </Button>

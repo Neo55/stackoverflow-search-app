@@ -17,9 +17,9 @@ export default class ResultScreen extends Component {
         <thead>
           <tr>
             <th style={{ width: 10 + "%" }}>Автор</th>
-            <th style={{ width: 60 + "%" }}>Тема</th>
+            <th style={{ width: 65 + "%" }}>Тема</th>
             <th style={{ width: 10 + "%" }}>Ответов</th>
-            <th style={{ width: 20 + "%" }}>Теги</th>
+            <th style={{ width: 15 + "%" }}>Теги</th>
           </tr>
         </thead>
         <tbody>
@@ -34,9 +34,14 @@ export default class ResultScreen extends Component {
                   <img
                     className="author-icon"
                     src={item.owner.profile_image}
-                    alt=""
+                    alt="author-icon"
                   />
-                  <p>{this.props.getUserName(item.owner.user_id)}</p>
+                  <p>
+                    {
+                      //this.props.getUserName(item.owner.user_id)
+                      //"name"
+                    }
+                  </p>
                   <p>{this.props.authorName}</p>
                   <p>{item.owner.user_id}</p>
                 </div>
@@ -57,11 +62,17 @@ export default class ResultScreen extends Component {
                   {item.answer_count}
                 </div>
               </td>
-              <td>
+              <td style={{ textAlign: "center" }}>
                 {item.tags.map(tag => {
-                  <h6>
-                    <Badge color="indigo">{tag}</Badge>
-                  </h6>;
+                  {
+                    return (
+                      <h6 key={tag}>
+                        <Badge onClick={e => this.onTagClick(tag)} key={tag}>
+                          {tag}
+                        </Badge>
+                      </h6>
+                    );
+                  }
                 })}
               </td>
               {/* </Animated> */}
@@ -79,6 +90,10 @@ export default class ResultScreen extends Component {
   clickAuthor(authorId) {
     this.props.selectAuthor(authorId);
     console.log(authorId);
+  }
+
+  onTagClick(tag) {
+    console.log(tag);
   }
 
   getUserName(userId) {

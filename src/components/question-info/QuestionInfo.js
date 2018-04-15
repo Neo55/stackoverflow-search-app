@@ -44,7 +44,7 @@ export default class QuestionInfo extends Component {
           <div className="row">
             <div className="col-md-10">
               <p>
-                Самые популярные вопросы по {this.props.selectPopularType}:{" "}
+                Ответы на: {this.props.selectPopularType}:{" "}
                 {this.props.popularSelectName}{" "}
               </p>
             </div>

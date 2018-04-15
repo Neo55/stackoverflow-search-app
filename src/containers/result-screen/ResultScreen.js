@@ -36,7 +36,7 @@ class ResultScreen extends Component {
               <SearchBox
                 className="serach-box result-list"
                 onSearch={this.onStartSearch}
-                //searchTextValue={this.props.text}
+                searchText={this.props.text}
                 onSearchTextChange={this.onSearchTextChange}
               />
             </Animated>
@@ -46,7 +46,13 @@ class ResultScreen extends Component {
               animationOut="tada"
               //isVisible={this.isVisibleResultTable()}
             >
-              <div className="result-screen result-list">
+              <div
+                style={{
+                  visibility:
+                    this.props.result.length === 0 ? "hidden" : "visible"
+                }}
+                className="result-screen result-list"
+              >
                 <ResultList
                   result={this.props.result}
                   selectAuthor={this.selectCurrentAuthor}
