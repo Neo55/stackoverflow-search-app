@@ -9,29 +9,26 @@ import * as searchSelectors from "../search/reducer";
 //   };
 // }
 
-// export function setPopularType(searchText) {
-//   return (dispatch, getState) => {
-//     const currentAuthor = searchSelectors.getSearchText(getState());
+export function setPopularType(selectPopularType) {
+  return {
+    type: types.SET_POPULAR_TYPE,
+    selectPopularType: selectPopularType
+  };
+}
 
-//     SearchService.search(searchText).then(response => {
-//       dispatch({
-//         type: types.SET_SEARCH_RESULT,
-//         result: response.data.items
-//       });
-//     });
-//   };
-//   return {
-//     type: types.STORE_SEARCH_TEXT,
-//     text: searchText
-//   };
-// }
+export function setPopularName(popularSelectName) {
+  return {
+    type: types.SET_POPULAR_NAME,
+    popularSelectName: popularSelectName
+  };
+}
 
-// export function setPopularName(author) {
-//   return {
-//     type: types.SELECT_AUTHOR,
-//     currentAuthor: author
-//   };
-// }
+export function selectQuestionName(selectQuestionName) {
+  return {
+    type: types.GET_SELECT_QUESTION_TITLE,
+    selectQuestionName: selectQuestionName
+  };
+}
 
 export function getAuthorName(authorId) {
   return {

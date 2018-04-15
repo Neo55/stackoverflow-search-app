@@ -10,32 +10,26 @@ const initialState = Immutable({
 export default function reduce(state = initialState, action = {}) {
   switch (action.type) {
     case types.GET_POPULAR_QUESTION_BY_AUTHOR:
-      //console.log(action.popularQuestionByAuthor);
       return state.merge({
         popularQuestion: action.popularQuestion
       });
     case types.GET_POPULAR_QUESTION_BY_TAG:
-      //console.log(action.popularQuestionByTag);
       return state.merge({
         popularQuestion: action.popularQuestion
       });
     case types.SET_SEARCH_RESULT:
-      //console.log(action.result);
       return state.merge({
         result: action.result
       });
     case types.STORE_SEARCH_TEXT:
-      //console.log(action.text);
       return state.merge({
         text: action.text
       });
     case types.SELECT_AUTHOR:
-      //console.log(action.currentAuthor);
       return state.merge({
         currentAuthor: action.currentAuthor
       });
     case types.SELECT_TAG:
-      //console.log(action.currentTag);
       return state.merge({
         currentTag: action.currentTag
       });

@@ -64,6 +64,9 @@ class ResultScreen extends Component {
                   authorName="name"
                   showQuestionInfo="false"
                 />
+                <Button className="button load-more" outline color="success">
+                  Загрузить еще
+                </Button>
               </div>
             </Animated>
           </div>
@@ -97,14 +100,19 @@ class ResultScreen extends Component {
   selectCurrentAuthor(authorId) {
     this.props.dispatch(searchActions.searchPopularQuestionByAuthor(authorId));
     this.props.dispatch(additionInfoActions.isShowAdditionInfo(true));
+    this.props.dispatch(additionInfoActions.setPopularType("автору"));
+    this.props.dispatch(additionInfoActions.setPopularName(authorId));
   }
 
   selectCurrentTag(tagName) {
     this.props.dispatch(searchActions.searchPopularQuestionByTag(tagName));
     this.props.dispatch(additionInfoActions.isShowAdditionInfo(true));
+    this.props.dispatch(additionInfoActions.setPopularType("тегу"));
+    this.props.dispatch(additionInfoActions.setPopularName(tagName));
   }
 
-  loadPopularAnswer() {
+  loadPopularAnswer(title) {
+    this.props.dispatch(additionInfoActions.selectQuestionName(title));
     this.props.dispatch(additionInfoActions.getPopularQuestionAnswer());
     this.props.dispatch(additionInfoActions.isShowQuestonInfo(true));
   }

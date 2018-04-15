@@ -49,7 +49,7 @@ export default class ResultScreen extends Component {
               <td>
                 <div
                   className="div coursor"
-                  onClick={e => this.showQuestionInfo()}
+                  onClick={e => this.showQuestionInfo(item.title)}
                 >
                   {item.title}
                 </div>
@@ -57,7 +57,7 @@ export default class ResultScreen extends Component {
               <td style={{ textAlign: "center" }}>
                 <div
                   className="div coursor"
-                  onClick={e => this.showQuestionInfo()}
+                  onClick={e => this.showQuestionInfo(item.title)}
                 >
                   {item.answer_count}
                 </div>
@@ -99,9 +99,8 @@ export default class ResultScreen extends Component {
     this.props.getUserNameById(userId);
   }
 
-  showQuestionInfo() {
-    console.log("qls");
+  showQuestionInfo(title) {
     this.props.showQuestionInfo;
-    this.props.showPopularAnswers();
+    this.props.showPopularAnswers(title);
   }
 }

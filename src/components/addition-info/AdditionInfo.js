@@ -19,17 +19,17 @@ export default class AdditionInfo extends Component {
       >
         <div className="title addition-table">
           <div className="row">
-            <div className="col-md-2 close-icon-col">
+            <div className="col-md-1 close-icon-col">
               <Fa
                 onClick={e => this.closeAdditionInfo()}
                 icon="close"
                 className="mr-1 close-icon"
               />
             </div>
-            <div className="col-md-10">
+            <div className="col-md-11">
               <p>
-                Самые популярные вопросы по {this.props.selectPopularType}:{" "}
-                {this.props.popularSelectName}{" "}
+                Самые популярные вопросы по {this.props.selectPopularType}{" "}
+                <br /> {this.props.popularSelectName}
               </p>
             </div>
           </div>
@@ -38,9 +38,8 @@ export default class AdditionInfo extends Component {
         <Table className="table table-striped">
           <thead>
             <tr>
-              <th>Тема</th>
-              <th>Ответов</th>
-              <th>Теги</th>
+              <th style={{ width: 80 + "%" }}>Тема</th>
+              <th style={{ width: 20 + "%" }}>Ответов</th>
             </tr>
           </thead>
           <tbody>
@@ -48,17 +47,13 @@ export default class AdditionInfo extends Component {
               <tr key={item.question_id}>
                 <td>{item.title}</td>
                 <td>{item.answer_count}</td>
-                <td>
-                  {item.tags.map(tag => {
-                    <h6>
-                      <Badge color="indigo">{tag}</Badge>
-                    </h6>;
-                  })}
-                </td>
               </tr>
             ))}
           </tbody>
         </Table>
+        <Button className="button load-more" outline color="success">
+          Загрузить еще
+        </Button>
       </div>
     );
   }

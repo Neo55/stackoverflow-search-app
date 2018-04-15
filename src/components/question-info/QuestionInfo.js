@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import autoBind from "react-autobind";
-import { Table, Badge, Spinner, Fa } from "mdbreact";
+import { Table, Badge, Spinner, Fa, Button } from "mdbreact";
 import "./QuestionInfo.scss";
 
 export default class QuestionInfo extends Component {
@@ -19,13 +19,10 @@ export default class QuestionInfo extends Component {
       >
         <div className="title question-info-table">
           <div className="row">
-            <div className="col-md-10">
-              <p>
-                Ответы на: {this.props.selectPopularType}:{" "}
-                {this.props.popularSelectName}{" "}
-              </p>
+            <div className="col-md-11">
+              <p>{this.props.selectQuestionName}?</p>
             </div>
-            <div className="col-md-2 close-icon-col">
+            <div className="col-md-1 close-icon-col">
               <Fa
                 onClick={e => {
                   this.closeQuestionInfo();
@@ -52,6 +49,9 @@ export default class QuestionInfo extends Component {
             ))}
           </tbody>
         </Table>
+        <Button className="button load-more" outline color="success">
+          Загрузить еще
+        </Button>
       </div>
     );
   }

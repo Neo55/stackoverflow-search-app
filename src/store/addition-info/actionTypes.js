@@ -4,3 +4,4 @@ export const SET_AUTHOR_NAME = "search.SET_AUTHOR_NAME";
 export const SHOW_QUESTION_INFO = "search.SHOW_QUESTION_INFO";
 export const SHOW_ADDITION_INFO = "search.SHOW_ADDITION_INFO";
 export const GET_POPULAR_ANSWERS = "search.GET_POPULAR_ANSWERS";
+export const GET_SELECT_QUESTION_TITLE = "search.GET_SELECT_QUESTION_TITLE";

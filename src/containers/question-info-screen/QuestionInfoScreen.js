@@ -24,13 +24,13 @@ class QuestionInfoScreen extends Component {
           popularAnswers={this.props.popularAnswers}
           questionTitle={this.props.questionTitle}
           hideQuestionInfo={this.hideQuestionInfo}
+          selectQuestionName={this.props.selectQuestionName}
         />
       </Animated>
     );
   }
 
   hideQuestionInfo() {
-    debugger;
     this.props.dispatch(additionInfoActions.isShowQuestonInfo(false));
   }
 }
@@ -38,7 +38,8 @@ class QuestionInfoScreen extends Component {
 function mapStateToProps(state) {
   return {
     isShowQuestionInfo: state.additionInfo.isShowQuestionInfo,
-    popularAnswers: state.additionInfo.popularAnswers
+    popularAnswers: state.additionInfo.popularAnswers,
+    selectQuestionName: state.additionInfo.selectQuestionName
   };
 }
 

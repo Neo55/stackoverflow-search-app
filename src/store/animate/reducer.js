@@ -10,7 +10,6 @@ const initialState = Immutable({
 export default function reduce(state = initialState, action = {}) {
   switch (action.type) {
     case types.CHANGE_ANIMATE_VISIBLE_STATUS:
-      console.log(action.status);
       return state.merge({
         mainSearchScreen: action.status
       });
