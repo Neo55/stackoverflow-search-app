@@ -29,6 +29,7 @@ export default class SearchBox extends Component {
             color="primary"
             className="button search"
             onClick={e => this.onClickSearchButton()}
+            disabled={this.props.isDisabledButton}
           >
             Найти
           </Button>
@@ -38,7 +39,7 @@ export default class SearchBox extends Component {
   }
 
   handleKeyPress = event => {
-    if (event.key == "Enter") {
+    if (event.key == "Enter" && !this.props.isDisabledButton) {
       this.onClickSearchButton();
     }
   };

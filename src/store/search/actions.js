@@ -2,12 +2,12 @@ import * as types from "./actionTypes";
 import SearchService from "../../services/search";
 import * as searchSelectors from "./reducer";
 
-// export function startSearch() {
-//   return {
-//     type: types.START_SEARCH,
-//     newSearch: true
-//   };
-// }
+export function searchMetaInfo() {
+  return {
+    type: types.SEARCH_META_INFO,
+    searchMetaInfo: searchMetaInfo
+  };
+}
 
 export function changeSearchText(searchText) {
   return {
@@ -30,7 +30,13 @@ export function selectTag(tag) {
   };
 }
 
-export function startSearch(result) {
+export function startSearch(meta) {
+  //  let currentMeta = searchSelectors.getSearchText(getState());
+  //   let newMeta = {
+  //     page: meta.page + 1,
+  //     limit: meta.limit + 50
+  //   };
+
   return {
     type: types.SET_SEARCH_RESULT,
     result: [

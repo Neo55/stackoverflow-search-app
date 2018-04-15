@@ -25,6 +25,7 @@ class SearchScreen extends Component {
             <SearchBox
               onSearch={this.onStartSearch}
               onSearchTextChange={this.onSearchTextChange}
+              isDisabledButton={this.props.text.length === 0}
             />
           </Animated>
         </div>
@@ -36,7 +37,7 @@ class SearchScreen extends Component {
   onStartSearch(searchText, context) {
     this.props.history.push("/result");
 
-    this.props.dispatch(searchActions.startSearch());
+    this.props.dispatch(searchActions.startSearch(this.props.searchMetaInfo));
     // this.props.dispatch(animateActions.changeAnimateVisibleStatus(!this.props.mainSearchScreen));
   }
 
@@ -48,8 +49,9 @@ class SearchScreen extends Component {
 function mapStateToProps(state) {
   return {
     mainSearchScreen: true,
-    text: state.text,
-    result: []
+    text: state.search.text,
+    result: [],
+    searchMetaInfo: state.search.searchMetaInfo
   };
 }
 

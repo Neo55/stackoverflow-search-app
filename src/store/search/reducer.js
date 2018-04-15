@@ -4,7 +4,13 @@ import * as types from "./actionTypes";
 const initialState = Immutable({
   text: "",
   result: [],
-  popularQuestion: []
+  popularQuestion: [],
+  currentAuthor: "",
+  currentTag: "",
+  searchMetaInfo: {
+    page: 0,
+    limit: 0
+  }
 });
 
 export default function reduce(state = initialState, action = {}) {
@@ -33,6 +39,10 @@ export default function reduce(state = initialState, action = {}) {
       return state.merge({
         currentTag: action.currentTag
       });
+    case types.SEARCH_META_INFO:
+      return state.merge({
+        searchMetaInfo: action.searchMetaInfo
+      });
   }
   return state;
 }
@@ -48,6 +58,7 @@ export function getCurrentAuthor(state) {
 export function getCurrentTag(state) {
   return state.search.currentTag;
 }
-// export function getSearchResult(state) {
-//   return state.topics.selectedTopicUrls;
-// }
+
+export function getMeta(state) {
+  return state.search.searchMetaInfo;
+}

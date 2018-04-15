@@ -40,6 +40,7 @@ class ResultScreen extends Component {
                 onSearch={this.onStartSearch}
                 searchText={this.props.text}
                 onSearchTextChange={this.onSearchTextChange}
+                isDisabledButton={this.props.text.length === 0}
               />
             </Animated>
 

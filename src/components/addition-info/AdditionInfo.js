@@ -28,7 +28,7 @@ export default class AdditionInfo extends Component {
             </div>
             <div className="col-md-11">
               <p>
-                Самые популярные вопросы по {this.props.selectPopularType}{" "}
+                Самые популярные вопросы по {this.props.selectPopularType}:
                 <br /> {this.props.popularSelectName}
               </p>
             </div>
@@ -46,7 +46,7 @@ export default class AdditionInfo extends Component {
             {this.props.popularQuestion.map(item => (
               <tr key={item.question_id}>
                 <td>{item.title}</td>
-                <td>{item.answer_count}</td>
+                <td style={{ textAlign: "center" }}>{item.answer_count}</td>
               </tr>
             ))}
           </tbody>

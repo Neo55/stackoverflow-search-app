@@ -6,3 +6,4 @@ export const GET_POPULAR_QUESTION_BY_AUTHOR =
 export const GET_POPULAR_QUESTION_BY_TAG = "search.GET_POPULAR_QUESTION_BY_TAG";
 export const SELECT_AUTHOR = "search.SELECT_AUTHOR";
 export const SELECT_TAG = "search.SELECT_TAG";
+export const SEARCH_META_INFO = "search.SEARCH_META_INFO";
