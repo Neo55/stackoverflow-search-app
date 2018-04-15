@@ -12,7 +12,6 @@ class AdditionInfoScreen extends Component {
     super(props);
     autoBind(this);
   }
-  debugger;
   render() {
     return (
       <Animated

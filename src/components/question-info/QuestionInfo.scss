@@ -24,5 +24,8 @@
     thead tr {
       text-align: center;
     }
+    tbody tr:nth-of-type(odd) {
+      background-color: #e3f2fd !important;
+    }
   }
 }

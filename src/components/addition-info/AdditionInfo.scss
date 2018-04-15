@@ -24,15 +24,8 @@
     thead tr {
       text-align: center;
     }
-    // tbody tr:nth-child(odd) td,
-    // tbody tr:nth-child(odd) th {
-    //   background-color: #f97777;
-    // }
-    // tbody tr:nth-child(odd) {
-    //   background-color: #f97777 !important;
-    // }
     tbody tr:nth-of-type(odd) {
-      background-color: #f97777 !important;
+      background-color: #e3f2fd !important;
     }
   }
 }
