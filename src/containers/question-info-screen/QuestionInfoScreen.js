@@ -25,6 +25,7 @@ class QuestionInfoScreen extends Component {
           questionTitle={this.props.questionTitle}
           hideQuestionInfo={this.hideQuestionInfo}
           selectQuestionName={this.props.selectQuestionName}
+          loadMoreQuestionInfo={this.loadMoreQuestionInfo}
         />
       </Animated>
     );
@@ -32,6 +33,10 @@ class QuestionInfoScreen extends Component {
 
   hideQuestionInfo() {
     this.props.dispatch(additionInfoActions.isShowQuestonInfo(false));
+  }
+
+  loadMoreQuestionInfo() {
+    this.props.dispatch(additionInfoActions.loadMoreQuestionInfo());
   }
 }
 

@@ -51,7 +51,12 @@ export default class AdditionInfo extends Component {
             ))}
           </tbody>
         </Table>
-        <Button className="button load-more" outline color="success">
+        <Button
+          className="button load-more"
+          outline
+          color="success"
+          onClick={e => this.onClickLoadMoreAdditionInfo()}
+        >
           Загрузить еще
         </Button>
       </div>
@@ -64,5 +69,9 @@ export default class AdditionInfo extends Component {
 
   closeAdditionInfo() {
     this.props.hideAdditionInfo();
+  }
+
+  onClickLoadMoreAdditionInfo() {
+    this.props.loadMoreAdditionInfo();
   }
 }

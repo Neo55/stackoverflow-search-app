@@ -1,6 +1,7 @@
 import * as types from "./actionTypes";
 import SearchService from "../../services/search";
 import * as searchSelectors from "../search/reducer";
+import * as additionInfoSelectors from "./reducer";
 
 // export function startSearch() {
 //   return {
@@ -49,12 +50,34 @@ export function getAuthorName(authorId) {
   //};
 }
 
-// export function isShowQuestonInfo() {
-//   return {
-//     type: types.SELECT_AUTHOR,
-//     isShowQuestionInfo: false
-//   };
-// }
+export function loadMoreQuestionInfo() {
+  return (dispatch, getState) => {
+    const currentMeta = additionInfoSelectors.getMetaQuestionInfo(getState());
+    const currentResult = additionInfoSelectors.getCurrentQuestionInfo(
+      getState()
+    );
+    const newMeta = {
+      page: currentMeta.page + 1
+    };
+
+    debugger;
+    dispatch({
+      type: types.SEARCH_META_INFO_QUESTION_INFO,
+      searchMetaInfoQuestionInfo: newMeta
+    });
+
+    const searchText = searchSelectors.getSearchText(getState());
+    // const fetchPromises = SearchService.searchMoreData(
+    //   searchText,
+    //   newMeta
+    // ).then(response => {
+    //   dispatch({
+    //     type: types.SET_SEARCH_RESULT,
+    //     result: [...currentResult, ...response.data.items]
+    //   });
+    // });
+  };
+}
 
 export function isShowQuestonInfo(isShow) {
   return {

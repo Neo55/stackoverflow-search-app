@@ -5,7 +5,15 @@ const configuration = require("./configuration");
 class SearchService {
   search(searchText) {
     return configuration.get(
-      `search?((&site=stackoverflow&order=desc&sort=activity&intitle=${searchText}&filter=default`
+      `search?((&page=1&pagesize=50&&site=stackoverflow&order=desc&sort=activity&intitle=${searchText}&filter=default`
+    );
+  }
+
+  searchMoreData(searchText, meta) {
+    return configuration.get(
+      `search?((&page=${
+        meta.page
+      }&pagesize=50&site=stackoverflow&order=desc&sort=activity&intitle=${searchText}&filter=default`
     );
   }
 

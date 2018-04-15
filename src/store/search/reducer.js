@@ -8,8 +8,10 @@ const initialState = Immutable({
   currentAuthor: "",
   currentTag: "",
   searchMetaInfo: {
-    page: 0,
-    limit: 0
+    page: 1
+  },
+  searchMetaInfoAdditionInfo: {
+    page: 1
   }
 });
 
@@ -43,6 +45,10 @@ export default function reduce(state = initialState, action = {}) {
       return state.merge({
         searchMetaInfo: action.searchMetaInfo
       });
+    case types.SEARCH_META_INFO_ADDITION_INFO:
+      return state.merge({
+        searchMetaInfoAdditionInfo: action.searchMetaInfoAdditionInfo
+      });
   }
   return state;
 }
@@ -61,4 +67,16 @@ export function getCurrentTag(state) {
 
 export function getMeta(state) {
   return state.search.searchMetaInfo;
+}
+
+export function getCurrentResult(state) {
+  return state.search.result;
+}
+
+export function getMetaAdditionInfo(state) {
+  return state.search.searchMetaInfoAdditionInfo;
+}
+
+export function getCurrentAdditionInfo(state) {
+  return state.search.popularQuestion;
 }

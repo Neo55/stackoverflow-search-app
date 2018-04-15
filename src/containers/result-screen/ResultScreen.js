@@ -65,7 +65,12 @@ class ResultScreen extends Component {
                   authorName="name"
                   showQuestionInfo="false"
                 />
-                <Button className="button load-more" outline color="success">
+                <Button
+                  className="button load-more"
+                  onClick={e => this.onClickLoadMoreResult()}
+                  outline
+                  color="success"
+                >
                   Загрузить еще
                 </Button>
               </div>
@@ -122,6 +127,10 @@ class ResultScreen extends Component {
     this.props.dispatch(additionInfoActions.getAuthorName(userId));
 
     return this.state;
+  }
+
+  onClickLoadMoreResult() {
+    this.props.dispatch(searchActions.loadMoreResult());
   }
 }
 

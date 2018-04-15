@@ -8,7 +8,10 @@ const initialState = Immutable({
   authorName: "",
   isShowQuestionInfo: false,
   isShowAdditionInfo: false,
-  popularAnswers: []
+  popularAnswers: [],
+  searchMetaInfoQuestionInfo: {
+    page: 1
+  }
 });
 
 export default function reduce(state = initialState, action = {}) {
@@ -41,6 +44,18 @@ export default function reduce(state = initialState, action = {}) {
       return state.merge({
         selectQuestionName: action.selectQuestionName
       });
+    case types.SEARCH_META_INFO_QUESTION_INFO:
+      return state.merge({
+        searchMetaInfoQuestionInfo: action.searchMetaInfoQuestionInfo
+      });
   }
   return state;
+}
+
+export function getMetaQuestionInfo(state) {
+  return state.additionInfo.searchMetaInfoQuestionInfo;
+}
+
+export function getCurrentQuestionInfo(state) {
+  return state.additionInfo.popularAnswers;
 }
