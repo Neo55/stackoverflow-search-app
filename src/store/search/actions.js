@@ -1,6 +1,7 @@
 import * as types from "./actionTypes";
 import SearchService from "../../services/search";
 import * as searchSelectors from "./reducer";
+import * as additionSelectors from "../addition-info/reducer";
 
 export function searchMetaInfo() {
   return {
@@ -16,51 +17,67 @@ export function changeSearchText(searchText) {
   };
 }
 
-export function selectAuthor(author) {
-  return {
-    type: types.SELECT_AUTHOR,
-    currentAuthor: author
-  };
-}
+// export function selectAuthor(author) {
+//   return {
+//     type: types.SELECT_AUTHOR,
+//     currentAuthor: author
+//   };
+// }
 
-export function selectTag(tag) {
-  return {
-    type: types.SELECT_TAG,
-    currentTag: tag
-  };
-}
+// export function selectTag(tag) {
+//   debugger;
+//   return {
+//     type: types.SELECT_TAG,
+//     currentTag: tag
+//   };
+// }
 
 export function loadMoreAdditionInfo() {
-  debugger;
-
   return (dispatch, getState) => {
     const currentMeta = searchSelectors.getMetaAdditionInfo(getState());
+
     const currentResult = searchSelectors.getCurrentAdditionInfo(getState());
     const newMeta = {
       page: currentMeta.page + 1
     };
 
+    debugger;
+    // const searchTag = searchSelectors.getCurrentTag(getState());
+    const getSelectPopularType = additionSelectors.getSelectPopularType(
+      getState()
+    );
+
     dispatch({
       type: types.SEARCH_META_INFO_ADDITION_INFO,
       searchMetaInfoAdditionInfo: newMeta
     });
-    debugger;
-    //  const searchText = searchSelectors.getSearchText(getState());
-    // const fetchPromises = SearchService.searchMoreData(
-    //   searchText,
-    //   newMeta
-    // ).then(response => {
-    //   dispatch({
-    //     type: types.SET_SEARCH_RESULT,
-    //     result: [...currentResult, ...response.data.items]
-    //   });
-    // });
+
+    if (getSelectPopularType === "тегу") {
+      const fetchPromises = SearchService.getMoreDataPopularQuestionByTag(
+        additionSelectors.getSelectPopularName(getState()),
+        newMeta
+      ).then(response => {
+        dispatch({
+          type: types.GET_POPULAR_QUESTION_BY_TAG,
+          popularQuestion: [...currentResult, ...response.data.items]
+        });
+      });
+    } else {
+      const fetchPromises = SearchService.getMoreDataPopularQuestionByAuthorMoreData(
+        additionSelectors.getSelectPopularName(getState()).id,
+        newMeta
+      ).then(response => {
+        debugger
+        dispatch({
+          type: types.GET_POPULAR_QUESTION_BY_AUTHOR,
+          popularQuestion: [...currentResult, ...response.data.items]
+        });
+      });
+    }
   };
 }
 
 export function loadMoreResult() {
-  debugger;
-
   return (dispatch, getState) => {
     const currentMeta = searchSelectors.getMeta(getState());
     const currentResult = searchSelectors.getCurrentResult(getState());
@@ -1267,666 +1284,27 @@ export function startSearch(meta) {
 }
 
 export function searchPopularQuestionByAuthor(authorId) {
-  return {
-    type: types.GET_POPULAR_QUESTION_BY_AUTHOR,
-    popularQuestion: [
-      {
-        tags: ["xml", "escaping", "character"],
-        owner: {
-          reputation: 12361,
-          user_id: 13370,
-          user_type: "registered",
-          accept_rate: 76,
-          profile_image: "https://i.stack.imgur.com/zdSpR.jpg?s=128&g=1",
-          display_name: "Julius A",
-          link: "https://stackoverflow.com/users/13370/julius-a"
-        },
-        is_answered: true,
-        view_count: 752566,
-        protected_date: 1521562586,
-        accepted_answer_id: 1091953,
-        answer_count: 10,
-        score: 757,
-        last_activity_date: 1507514488,
-        creation_date: 1246968462,
-        last_edit_date: 1409841866,
-        question_id: 1091945,
-        link:
-          "https://stackoverflow.com/questions/1091945/what-characters-do-i-need-to-escape-in-xml-documents",
-        title: "What characters do I need to escape in XML documents?"
-      },
-      {
-        tags: ["android", "xml", "image", "layout"],
-        owner: {
-          reputation: 1659,
-          user_id: 1764852,
-          user_type: "registered",
-          accept_rate: 43,
-          profile_image: "https://i.stack.imgur.com/YFd3A.jpg?s=128&g=1",
-          display_name: "Addy",
-          link: "https://stackoverflow.com/users/1764852/addy"
-        },
-        is_answered: true,
-        view_count: 286986,
-        accepted_answer_id: 16161493,
-        answer_count: 16,
-        score: 333,
-        last_activity_date: 1515750509,
-        creation_date: 1366693975,
-        last_edit_date: 1477274081,
-        question_id: 16161448,
-        link:
-          "https://stackoverflow.com/questions/16161448/how-to-make-layout-with-rounded-corners",
-        title: "How to make layout with rounded corners..?"
-      },
-      {
-        tags: ["android", "fonts", "styles"],
-        owner: {
-          reputation: 18497,
-          user_id: 413414,
-          user_type: "registered",
-          accept_rate: 72,
-          profile_image: "https://i.stack.imgur.com/g59ew.jpg?s=128&g=1",
-          display_name: "Christopher Perry",
-          link: "https://stackoverflow.com/users/413414/christopher-perry"
-        },
-        is_answered: true,
-        view_count: 163486,
-        accepted_answer_id: 19692168,
-        answer_count: 3,
-        score: 212,
-        last_activity_date: 1513889736,
-        creation_date: 1383159471,
-        last_edit_date: 1495542887,
-        question_id: 19691530,
-        link:
-          "https://stackoverflow.com/questions/19691530/valid-values-for-androidfontfamily-and-what-they-map-to",
-        title: "Valid values for android:fontFamily and what they map to?"
-      },
-      {
-        tags: ["android", "android-intent"],
-        owner: {
-          reputation: 21511,
-          user_id: 22303,
-          user_type: "registered",
-          accept_rate: 86,
-          profile_image:
-            "https://www.gravatar.com/avatar/e391eba5bc6f2c833fda426b8e8e37a5?s=128&d=identicon&r=PG",
-          display_name: "Kon",
-          link: "https://stackoverflow.com/users/22303/kon"
-        },
-        is_answered: true,
-        view_count: 42794,
-        accepted_answer_id: 5735419,
-        answer_count: 6,
-        score: 51,
-        last_activity_date: 1507633457,
-        creation_date: 1303322799,
-        last_edit_date: 1303323427,
-        question_id: 5734678,
-        link:
-          "https://stackoverflow.com/questions/5734678/custom-filtering-of-intent-chooser-based-on-installed-android-package-name",
-        title:
-          "Custom filtering of intent chooser based on installed Android package name"
-      },
-      {
-        tags: ["android", "android-layout", "android-tools-namespace"],
-        owner: {
-          reputation: 5303,
-          user_id: 628447,
-          user_type: "registered",
-          accept_rate: 92,
-          profile_image:
-            "https://www.gravatar.com/avatar/b1e3e0cfe207c32be204d7258580fe6d?s=128&d=identicon&r=PG",
-          display_name: "Aracem",
-          link: "https://stackoverflow.com/users/628447/aracem"
-        },
-        is_answered: true,
-        view_count: 1754,
-        accepted_answer_id: 41030872,
-        answer_count: 1,
-        score: 49,
-        last_activity_date: 1481716090,
-        creation_date: 1479130619,
-        last_edit_date: 1481716090,
-        question_id: 40590046,
-        link:
-          "https://stackoverflow.com/questions/40590046/what-is-toolsmockup-toolsmockup-crop-and-toolsmockup-opacity",
-        title:
-          "What is tools:mockup, tools:mockup_crop and tools:mockup_opacity"
-      },
-      {
-        tags: ["android", "bitmap", "android-ndk", "jni", "image-rotation"],
-        owner: {
-          reputation: 58530,
-          user_id: 878126,
-          user_type: "registered",
-          accept_rate: 51,
-          profile_image: "https://i.stack.imgur.com/D5dZW.jpg?s=128&g=1",
-          display_name: "android developer",
-          link: "https://stackoverflow.com/users/878126/android-developer"
-        },
-        is_answered: true,
-        view_count: 14740,
-        accepted_answer_id: 14399349,
-        answer_count: 1,
-        score: 9,
-        last_activity_date: 1378907961,
-        creation_date: 1358511013,
-        last_edit_date: 1495541861,
-        question_id: 14398670,
-        link:
-          "https://stackoverflow.com/questions/14398670/rotating-a-bitmap-using-jni-ndk",
-        title: "Rotating a bitmap using JNI &amp; NDK"
-      },
-      {
-        tags: ["android"],
-        owner: {
-          reputation: 858,
-          user_id: 836308,
-          user_type: "registered",
-          accept_rate: 37,
-          profile_image:
-            "https://www.gravatar.com/avatar/6505374bfb2022d46c914357cc0db8b3?s=128&d=identicon&r=PG&f=1",
-          display_name: "xmen",
-          link: "https://stackoverflow.com/users/836308/xmen"
-        },
-        is_answered: true,
-        view_count: 3015,
-        answer_count: 1,
-        score: 8,
-        last_activity_date: 1391614272,
-        creation_date: 1391613928,
-        question_id: 21581297,
-        link:
-          "https://stackoverflow.com/questions/21581297/difference-between-isexternalstorageremovable-and-isexternalstorageemulated",
-        title:
-          "Difference between isExternalStorageRemovable and isExternalStorageEmulated"
-      },
-      {
-        tags: ["android", "android-5.0-lollipop"],
-        owner: {
-          reputation: 41,
-          user_id: 3871904,
-          user_type: "registered",
-          profile_image: "https://i.stack.imgur.com/Gwm4F.jpg?s=128&g=1",
-          display_name: "Dlleixap",
-          link: "https://stackoverflow.com/users/3871904/dlleixap"
-        },
-        is_answered: false,
-        view_count: 1450,
-        answer_count: 0,
-        score: 8,
-        last_activity_date: 1406563946,
-        creation_date: 1406557013,
-        last_edit_date: 1406563946,
-        question_id: 24997273,
-        link:
-          "https://stackoverflow.com/questions/24997273/make-the-navigation-bar-stay-on-top-of-any-activity-animation",
-        title: "Make the navigation bar stay on top of any activity animation"
-      },
-      {
-        tags: ["android", "actionbarsherlock", "appcompat"],
-        owner: {
-          reputation: 82,
-          user_id: 2886349,
-          user_type: "registered",
-          profile_image: "https://i.stack.imgur.com/cW0IM.jpg?s=128&g=1",
-          display_name: "GReaper",
-          link: "https://stackoverflow.com/users/2886349/greaper"
-        },
-        is_answered: true,
-        view_count: 1031,
-        accepted_answer_id: 22780310,
-        answer_count: 1,
-        score: 7,
-        last_activity_date: 1396340289,
-        creation_date: 1385543858,
-        question_id: 20238216,
-        link:
-          "https://stackoverflow.com/questions/20238216/smoother-transition-from-fullscreen-activity-using-actionbarsherlock",
-        title:
-          "Smoother transition from fullscreen activity using ActionBarSherlock"
-      },
-      {
-        tags: ["android", "connection", "usb", "internet-connection"],
-        owner: {
-          reputation: 14735,
-          user_id: 779408,
-          user_type: "registered",
-          accept_rate: 70,
-          profile_image:
-            "https://www.gravatar.com/avatar/fe085778f17b774dbd1574b9260bb8ae?s=128&d=identicon&r=PG",
-          display_name: "breceivemail",
-          link: "https://stackoverflow.com/users/779408/breceivemail"
-        },
-        is_answered: true,
-        view_count: 20409,
-        closed_date: 1368620579,
-        accepted_answer_id: 9442042,
-        answer_count: 1,
-        score: 5,
-        last_activity_date: 1363333220,
-        creation_date: 1330151478,
-        last_edit_date: 1346662338,
-        question_id: 9441879,
-        link:
-          "https://stackoverflow.com/questions/9441879/is-it-possible-to-share-my-internet-connection-from-pc-to-android-via-usb",
-        closed_reason: "off topic",
-        title:
-          "Is it possible to share my internet connection from pc to android via usb?"
-      },
-      {
-        tags: ["android", "android-studio"],
-        owner: {
-          reputation: 58530,
-          user_id: 878126,
-          user_type: "registered",
-          accept_rate: 51,
-          profile_image: "https://i.stack.imgur.com/D5dZW.jpg?s=128&g=1",
-          display_name: "android developer",
-          link: "https://stackoverflow.com/users/878126/android-developer"
-        },
-        is_answered: true,
-        view_count: 712,
-        accepted_answer_id: 46193419,
-        answer_count: 1,
-        score: 5,
-        last_activity_date: 1513074517,
-        creation_date: 1505291184,
-        last_edit_date: 1513074517,
-        question_id: 46192545,
-        link:
-          "https://stackoverflow.com/questions/46192545/how-to-put-new-placeholder-resources-into-android-studio-project-toolssample",
-        title:
-          "How to put new placeholder resources into Android Studio project (&quot;tools:sample&quot; resources)?"
-      },
-      {
-        tags: ["adb", "battery", "dumpsys"],
-        owner: {
-          reputation: 16,
-          user_id: 3782023,
-          user_type: "registered",
-          profile_image: "https://i.stack.imgur.com/fC9Ln.jpg?s=128&g=1",
-          display_name: "asting",
-          link: "https://stackoverflow.com/users/3782023/asting"
-        },
-        is_answered: false,
-        view_count: 753,
-        answer_count: 0,
-        score: 3,
-        last_activity_date: 1404209634,
-        creation_date: 1404209634,
-        question_id: 24507714,
-        link:
-          "https://stackoverflow.com/questions/24507714/how-to-ues-dumpsys-batterystats-to-get-a-apps-power-consumption-s-percentage",
-        title:
-          "How to ues &quot;dumpsys batterystats&quot; to get a app&#39;s Power Consumption‘s Percentage"
-      },
-      {
-        tags: ["android", "c++", "eclipse", "android-ndk", "jni"],
-        owner: {
-          reputation: 464,
-          user_id: 1280679,
-          user_type: "registered",
-          accept_rate: 87,
-          profile_image:
-            "https://www.gravatar.com/avatar/5fa1ed9847948347e2e316893fa6f811?s=128&d=identicon&r=PG",
-          display_name: "ZiviMagic",
-          link: "https://stackoverflow.com/users/1280679/zivimagic"
-        },
-        is_answered: false,
-        view_count: 1512,
-        answer_count: 2,
-        score: 3,
-        last_activity_date: 1422011932,
-        creation_date: 1418498889,
-        last_edit_date: 1495542295,
-        question_id: 27462754,
-        link:
-          "https://stackoverflow.com/questions/27462754/compiling-hello-jni-failure-in-eclipse-only-when-opening-the-hello-jni-c-file-in",
-        title:
-          "Compiling Hello-Jni failure in eclipse only when opening the hello-jni.c file in eclipse"
-      },
-      {
-        tags: ["android", "android-intent", "android-contacts"],
-        owner: {
-          reputation: 58530,
-          user_id: 878126,
-          user_type: "registered",
-          accept_rate: 51,
-          profile_image: "https://i.stack.imgur.com/D5dZW.jpg?s=128&g=1",
-          display_name: "android developer",
-          link: "https://stackoverflow.com/users/878126/android-developer"
-        },
-        is_answered: false,
-        view_count: 648,
-        answer_count: 1,
-        score: 3,
-        last_activity_date: 1486047221,
-        creation_date: 1457970586,
-        last_edit_date: 1458130368,
-        question_id: 35992096,
-        link:
-          "https://stackoverflow.com/questions/35992096/how-to-showhandle-contact-details-intents-of-apps",
-        title: "How to show&amp;handle contact details intents of apps?"
-      },
-      {
-        tags: ["android", "renderscript"],
-        owner: {
-          reputation: 26728,
-          user_id: 907695,
-          user_type: "registered",
-          accept_rate: 71,
-          profile_image:
-            "https://www.gravatar.com/avatar/daac9f1ef1a91604000a38376cace034?s=128&d=identicon&r=PG",
-          display_name: "Pointer Null",
-          link: "https://stackoverflow.com/users/907695/pointer-null"
-        },
-        is_answered: true,
-        view_count: 1412,
-        answer_count: 1,
-        score: 1,
-        last_activity_date: 1372715723,
-        creation_date: 1372663279,
-        question_id: 17399255,
-        link:
-          "https://stackoverflow.com/questions/17399255/renderscript-getting-neighbor-pixel",
-        title: "Renderscript - getting neighbor pixel"
-      },
-      {
-        tags: ["android"],
-        owner: {
-          reputation: 6,
-          user_id: 7673882,
-          user_type: "registered",
-          profile_image:
-            "https://www.gravatar.com/avatar/a1554788d4a9de1cc5ad1e03e4bc5e36?s=128&d=identicon&r=PG",
-          display_name: "Santiago Cirillo",
-          link: "https://stackoverflow.com/users/7673882/santiago-cirillo"
-        },
-        is_answered: false,
-        view_count: 222,
-        answer_count: 0,
-        score: 1,
-        last_activity_date: 1488908947,
-        creation_date: 1488908947,
-        question_id: 42654921,
-        link:
-          "https://stackoverflow.com/questions/42654921/how-to-install-android-apk-using-packageinstaller-and-deviceowner",
-        title:
-          "How to install android apk using PackageInstaller and DeviceOwner"
-      }
-    ]
+  return (dispatch, getState) => {
+    debugger;
+    SearchService.getPopularQuestionByAuthor(authorId).then(response => {
+      dispatch({
+        type: types.GET_POPULAR_QUESTION_BY_AUTHOR,
+        popularQuestion: response.data.items
+      });
+    });
   };
-  // return (dispatch, getState) => {
-
-  //   SearchService.getPopularQuestionByAuthor(authorId).then(response => {
-  //     dispatch({
-  //       type: types.GET_POPULAR_QUESTION_BY_AUTHOR,
-  //       popularQuestion: response.data.items
-  //     });
-  //   });
-  // };
 }
 
 export function searchPopularQuestionByTag(popularQuestions) {
-  return {
-    type: types.GET_POPULAR_QUESTION_BY_TAG,
-    popularQuestion: [
-      {
-        tags: ["extjs", "mvvm", "data-binding", "grid", "viewmodel"],
-        owner: {
-          reputation: 126,
-          user_id: 1407379,
-          user_type: "registered",
-          accept_rate: 27,
-          profile_image: "https://i.stack.imgur.com/F4m3K.png?s=128&g=1",
-          display_name: "Nish",
-          link: "https://stackoverflow.com/users/1407379/nish"
-        },
-        is_answered: true,
-        view_count: 10203,
-        answer_count: 2,
-        score: 4,
-        last_activity_date: 1523792460,
-        creation_date: 1440685199,
-        last_edit_date: 1523792284,
-        question_id: 32251926,
-        link:
-          "https://stackoverflow.com/questions/32251926/extjs-how-to-bind-grid-record-in-viewmodel-fields",
-        title: "ExtJs How to bind grid record in ViewModel fields?"
-      },
-      {
-        tags: ["javascript", "extjs", "extjs4", "sencha-touch", "extjs4.2"],
-        owner: {
-          reputation: 38,
-          user_id: 4972133,
-          user_type: "registered",
-          accept_rate: 100,
-          profile_image:
-            "https://www.gravatar.com/avatar/6db332ec6ab981fa4a6bad974d9874ef?s=128&d=identicon&r=PG&f=1",
-          display_name: "Sharvil",
-          link: "https://stackoverflow.com/users/4972133/sharvil"
-        },
-        is_answered: false,
-        view_count: 5,
-        answer_count: 0,
-        score: 0,
-        last_activity_date: 1523791153,
-        creation_date: 1523791153,
-        question_id: 49841323,
-        link:
-          "https://stackoverflow.com/questions/49841323/how-to-put-data-from-json-to-extjs-grid-view-in-ext-window",
-        title: "How to put data from json to extjs grid view in ext window"
-      },
-      {
-        tags: ["extjs", "sencha-touch-2"],
-        owner: {
-          reputation: 7496,
-          user_id: 220579,
-          user_type: "registered",
-          accept_rate: 72,
-          profile_image:
-            "https://www.gravatar.com/avatar/cc7313d657a33369d9b96e954f73e132?s=128&d=identicon&r=PG",
-          display_name: "Kumar Bibek",
-          link: "https://stackoverflow.com/users/220579/kumar-bibek"
-        },
-        is_answered: true,
-        view_count: 6660,
-        accepted_answer_id: 16772812,
-        answer_count: 2,
-        score: 7,
-        last_activity_date: 1523790351,
-        creation_date: 1369652770,
-        last_edit_date: 1523790351,
-        question_id: 16771804,
-        link:
-          "https://stackoverflow.com/questions/16771804/passing-data-to-another-view-from-controller-and-set-a-labels-value-in-sencha-t",
-        title:
-          "Passing data to another view from controller and set a label&#39;s value in sencha touch"
-      },
-      {
-        tags: ["extjs", "extjs4"],
-        owner: {
-          reputation: 8,
-          user_id: 1700319,
-          user_type: "registered",
-          profile_image:
-            "https://www.gravatar.com/avatar/002d1bd3a2720f66f1e99121e777d452?s=128&d=identicon&r=PG",
-          display_name: "Patrick Kerschbaum",
-          link: "https://stackoverflow.com/users/1700319/patrick-kerschbaum"
-        },
-        is_answered: true,
-        view_count: 893,
-        accepted_answer_id: 14829448,
-        answer_count: 1,
-        score: 1,
-        last_activity_date: 1523784288,
-        creation_date: 1348665948,
-        last_edit_date: 1523784249,
-        question_id: 12602814,
-        link:
-          "https://stackoverflow.com/questions/12602814/extjs-4-grid-columns-error",
-        title: "ExtJS 4 grid columns error"
-      },
-      {
-        tags: ["extjs", "grid"],
-        owner: {
-          reputation: 2540,
-          user_id: 128586,
-          user_type: "registered",
-          accept_rate: 58,
-          profile_image:
-            "https://www.gravatar.com/avatar/8f2033750c1a409b142ae0f3025c3857?s=128&d=identicon&r=PG",
-          display_name: "ken",
-          link: "https://stackoverflow.com/users/128586/ken"
-        },
-        is_answered: true,
-        view_count: 13444,
-        accepted_answer_id: 2431369,
-        answer_count: 2,
-        score: 4,
-        last_activity_date: 1523783922,
-        creation_date: 1268374975,
-        last_edit_date: 1523678737,
-        question_id: 2430899,
-        link: "https://stackoverflow.com/questions/2430899/extjs-dynamic-grid",
-        title: "Extjs Dynamic Grid"
-      },
-      {
-        tags: ["date", "datetime", "extjs", "extjs4.2"],
-        owner: {
-          reputation: 827,
-          user_id: 2860391,
-          user_type: "registered",
-          accept_rate: 83,
-          profile_image:
-            "https://www.gravatar.com/avatar/012dccf5619014e779a73586edff782b?s=128&d=identicon&r=PG&f=1",
-          display_name: "Abdul Rehman Yawar Khan",
-          link:
-            "https://stackoverflow.com/users/2860391/abdul-rehman-yawar-khan"
-        },
-        is_answered: true,
-        view_count: 89,
-        accepted_answer_id: 35322652,
-        answer_count: 2,
-        score: 1,
-        last_activity_date: 1523781342,
-        creation_date: 1455113181,
-        last_edit_date: 1523781342,
-        question_id: 35317367,
-        link:
-          "https://stackoverflow.com/questions/35317367/extjs4-2-persist-time-while-displaying-date-time-in-datecolumn",
-        title:
-          "ExtJs(4.2): Persist Time While Displaying Date time in DateColumn"
-      },
-      {
-        tags: ["javascript", "extjs"],
-        owner: {
-          reputation: 6,
-          user_id: 2851589,
-          user_type: "registered",
-          profile_image:
-            "https://www.gravatar.com/avatar/a13f190d5480d177866982cdae38e1ae?s=128&d=identicon&r=PG&f=1",
-          display_name: "Amit Nekar",
-          link: "https://stackoverflow.com/users/2851589/amit-nekar"
-        },
-        is_answered: false,
-        view_count: 68,
-        answer_count: 1,
-        score: 0,
-        last_activity_date: 1523781095,
-        creation_date: 1511791893,
-        last_edit_date: 1523781095,
-        question_id: 47512955,
-        link:
-          "https://stackoverflow.com/questions/47512955/how-to-add-a-button-in-grid-row-in-extjs",
-        title: "How to add a button in grid row in Extjs?"
-      },
-      {
-        tags: ["css", "class", "extjs", "styles"],
-        owner: {
-          reputation: 21,
-          user_id: 4317395,
-          user_type: "registered",
-          profile_image:
-            "https://www.gravatar.com/avatar/503427e68438b218362858b49b4bf8e9?s=128&d=identicon&r=PG&f=1",
-          display_name: "Excessstone",
-          link: "https://stackoverflow.com/users/4317395/excessstone"
-        },
-        is_answered: true,
-        view_count: 6848,
-        answer_count: 2,
-        score: -1,
-        last_activity_date: 1523779528,
-        creation_date: 1417552541,
-        last_edit_date: 1523779528,
-        question_id: 27258463,
-        link:
-          "https://stackoverflow.com/questions/27258463/extjs-5-how-to-make-two-panel-with-different-style",
-        title: "Extjs 5: how to make two panel with different style"
-      },
-      {
-        tags: ["extjs", "extjs4", "extjs-mvc", "extjs4.1"],
-        owner: {
-          reputation: 3006,
-          user_id: 1377826,
-          user_type: "registered",
-          accept_rate: 64,
-          profile_image:
-            "https://www.gravatar.com/avatar/f0b6e6e3ea80d80ea4f6c4955c10031c?s=128&d=identicon&r=PG",
-          display_name: "sharon Hwk",
-          link: "https://stackoverflow.com/users/1377826/sharon-hwk"
-        },
-        is_answered: true,
-        view_count: 2926,
-        accepted_answer_id: 11298382,
-        answer_count: 1,
-        score: 3,
-        last_activity_date: 1523778141,
-        creation_date: 1341245594,
-        last_edit_date: 1523778141,
-        question_id: 11297378,
-        link:
-          "https://stackoverflow.com/questions/11297378/grid-button-click-handler",
-        title: "Grid - button click handler"
-      },
-      {
-        tags: ["extjs", "extjs4"],
-        owner: {
-          reputation: 18,
-          user_id: 572935,
-          user_type: "registered",
-          profile_image:
-            "https://www.gravatar.com/avatar/c020a719f97cfb2cf9653fd1628889e7?s=128&d=identicon&r=PG",
-          display_name: "chufall",
-          link: "https://stackoverflow.com/users/572935/chufall"
-        },
-        is_answered: true,
-        view_count: 1748,
-        accepted_answer_id: 7064078,
-        answer_count: 1,
-        score: 0,
-        last_activity_date: 1523776955,
-        creation_date: 1313385871,
-        last_edit_date: 1523776955,
-        question_id: 7061931,
-        link:
-          "https://stackoverflow.com/questions/7061931/prevent-extjs4s-treegrid-load-data-at-the-initialization",
-        title: "Prevent extjs4&#39;s treegrid load data at the initialization"
-      }
-    ]
+  return (dispatch, getState) => {
+    const selectedTag = additionSelectors.getSelectPopularName(getState());
+    const fetchPromises = SearchService.getPopularQuestionByTag(
+      selectedTag
+    ).then(response => {
+      dispatch({
+        type: types.GET_POPULAR_QUESTION_BY_TAG,
+        popularQuestion: response.data.items
+      });
+    });
   };
-  // return (dispatch, getState) => {
-  //   const searchText = searchSelectors.getSearchText(getState());
-  //   const fetchPromises = SearchService.getTestData(searchText).then(
-  //     response => {
-  //       dispatch({
-  //         type: types.GET_POPULAR_QUESTION_BY_TAG,
-  //         result: response.data.items
-  //       });
-  //     }
-  //   );
-  // };
 }

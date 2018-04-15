@@ -5,7 +5,10 @@ const initialState = Immutable({
   selectPopularType: "",
   popularSelectName: "",
   selectQuestionName: "",
-  authorName: "",
+  authorData: {
+    id: "",
+    name: ""
+  },
   isShowQuestionInfo: false,
   isShowAdditionInfo: false,
   popularAnswers: [],
@@ -24,9 +27,9 @@ export default function reduce(state = initialState, action = {}) {
       return state.merge({
         popularSelectName: action.popularSelectName
       });
-    case types.SET_AUTHOR_NAME:
+    case types.SET_AUTHOR_DATA:
       return state.merge({
-        authorName: action.authorName
+        authorData: action.authorData
       });
     case types.SHOW_QUESTION_INFO:
       return state.merge({
@@ -58,4 +61,12 @@ export function getMetaQuestionInfo(state) {
 
 export function getCurrentQuestionInfo(state) {
   return state.additionInfo.popularAnswers;
+}
+
+export function getSelectPopularType(state) {
+  return state.additionInfo.selectPopularType;
+}
+
+export function getSelectPopularName(state) {
+  return state.additionInfo.popularSelectName;
 }

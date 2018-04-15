@@ -29,21 +29,19 @@ export default class ResultScreen extends Component {
               <td scope="row" style={{ textAlign: "center" }}>
                 <div
                   className="div coursor"
-                  onClick={e => this.clickAuthor(item.owner.user_id)}
+                  onClick={e =>
+                    this.clickAuthor({
+                      name: item.owner.display_name,
+                      id: item.owner.user_id
+                    })
+                  }
                 >
                   <img
                     className="author-icon"
                     src={item.owner.profile_image}
                     alt="author-icon"
                   />
-                  <p>
-                    {
-                      //this.props.getUserName(item.owner.user_id)
-                      //"name"
-                    }
-                  </p>
-                  <p>{this.props.authorName}</p>
-                  <p>{item.owner.user_id}</p>
+                  <p className="user-name">{item.owner.display_name}</p>
                 </div>
               </td>
               <td>
@@ -87,16 +85,12 @@ export default class ResultScreen extends Component {
     return <Spinner big multicolor />;
   }
 
-  clickAuthor(authorId) {
-    this.props.selectAuthor(authorId);
+  clickAuthor(authorData) {
+    this.props.selectAuthor(authorData);
   }
 
   onTagClick(tagName) {
     this.props.selectTag(tagName);
-  }
-
-  getUserName(userId) {
-    this.props.getUserNameById(userId);
   }
 
   showQuestionInfo(title) {

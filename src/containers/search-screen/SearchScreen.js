@@ -38,7 +38,6 @@ class SearchScreen extends Component {
     this.props.history.push("/result");
 
     this.props.dispatch(searchActions.startSearch(this.props.searchMetaInfo));
-    // this.props.dispatch(animateActions.changeAnimateVisibleStatus(!this.props.mainSearchScreen));
   }
 
   onSearchTextChange(text) {

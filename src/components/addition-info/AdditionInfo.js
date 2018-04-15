@@ -29,7 +29,10 @@ export default class AdditionInfo extends Component {
             <div className="col-md-11">
               <p>
                 Самые популярные вопросы по {this.props.selectPopularType}:
-                <br /> {this.props.popularSelectName}
+                <br />{" "}
+                {this.props.selectPopularType === "тегу"
+                  ? this.props.popularSelectName
+                  : this.props.popularSelectName.name}
               </p>
             </div>
           </div>

@@ -5,7 +5,7 @@ const configuration = require("./configuration");
 class SearchService {
   search(searchText) {
     return configuration.get(
-      `search?((&page=1&pagesize=50&&site=stackoverflow&order=desc&sort=activity&intitle=${searchText}&filter=default`
+      `search?((&page=1&pagesize=50&site=stackoverflow&order=desc&sort=relevance&intitle=${searchText}&filter=default`
     );
   }
 
@@ -19,13 +19,29 @@ class SearchService {
 
   getPopularQuestionByAuthor(authorId) {
     return configuration.get(
-      `users/${authorId}/favorites?((&order=desc&sort=activity&site=stackoverflow`
+      `users/${authorId}/questions?page=1&pagesize=20&order=desc&sort=votes&site=stackoverflow`
+    );
+  }
+
+  getMoreDataPopularQuestionByAuthorMoreData(authorId, meta) {
+    return configuration.get(
+      `users/${authorId}/questions?page=${
+        meta.page
+      }&pagesize=20&order=desc&sort=votes&site=stackoverflow`
     );
   }
 
   getPopularQuestionByTag(tag) {
     return configuration.get(
-      `questions?((&order=desc&sort=activity&tagged=${tag}&site=stackoverflow`
+      `questions?page=1&pagesize=20&order=desc&sort=votes&tagged=${tag}&site=stackoverflow`
+    );
+  }
+
+  getMoreDataPopularQuestionByTag(tag, meta) {
+    return configuration.get(
+      `questions?page=${
+        meta.page
+      }&pagesize=20&order=desc&sort=votes&tagged=${tag}&site=stackoverflow`
     );
   }
 
@@ -72,7 +88,7 @@ class SearchService {
 
   getAnswersByQustion(questionId) {
     return configuration.get(
-      `questions/${questionId}?((&site=stackoverflow&order=desc&sort=activity`
+      `questions/${questionId}?((&site=stackoverflow&order=desc&sort=votes`
     );
   }
 }

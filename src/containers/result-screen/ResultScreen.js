@@ -61,7 +61,7 @@ class ResultScreen extends Component {
                   selectAuthor={this.selectCurrentAuthor}
                   selectTag={this.selectCurrentTag}
                   showPopularAnswers={this.loadPopularAnswer}
-                  getUserName={this.getUserNameById}
+                  //  getUserName={this.getUserNameById}
                   authorName="name"
                   showQuestionInfo="false"
                 />
@@ -103,30 +103,26 @@ class ResultScreen extends Component {
     this.props.dispatch(searchActions.changeSearchText(text));
   }
 
-  selectCurrentAuthor(authorId) {
-    this.props.dispatch(searchActions.searchPopularQuestionByAuthor(authorId));
+  selectCurrentAuthor(authorData) {
     this.props.dispatch(additionInfoActions.isShowAdditionInfo(true));
     this.props.dispatch(additionInfoActions.setPopularType("автору"));
-    this.props.dispatch(additionInfoActions.setPopularName(authorId));
+    this.props.dispatch(additionInfoActions.setPopularName(authorData));
+    this.props.dispatch(
+      searchActions.searchPopularQuestionByAuthor(authorData.id)
+    );
   }
 
   selectCurrentTag(tagName) {
-    this.props.dispatch(searchActions.searchPopularQuestionByTag(tagName));
     this.props.dispatch(additionInfoActions.isShowAdditionInfo(true));
     this.props.dispatch(additionInfoActions.setPopularType("тегу"));
     this.props.dispatch(additionInfoActions.setPopularName(tagName));
+    this.props.dispatch(searchActions.searchPopularQuestionByTag(tagName));
   }
 
   loadPopularAnswer(title) {
     this.props.dispatch(additionInfoActions.selectQuestionName(title));
     this.props.dispatch(additionInfoActions.getPopularQuestionAnswer());
     this.props.dispatch(additionInfoActions.isShowQuestonInfo(true));
-  }
-
-  getUserNameById(userId) {
-    this.props.dispatch(additionInfoActions.getAuthorName(userId));
-
-    return this.state;
   }
 
   onClickLoadMoreResult() {
@@ -142,7 +138,7 @@ function mapStateToProps(state) {
     currentAuthor: state.search.currentAuthor,
     selectPopularType: state.search.selectPopularType,
     popularSelectName: state.search.popularSelectName,
-    authorName: state.search.authorName,
+    authorData: state.search.authorData,
     popularAnswers: state.additionInfo.popularAnswers
   };
 }

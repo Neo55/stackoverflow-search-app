@@ -3,13 +3,6 @@ import SearchService from "../../services/search";
 import * as searchSelectors from "../search/reducer";
 import * as additionInfoSelectors from "./reducer";
 
-// export function startSearch() {
-//   return {
-//     type: types.START_SEARCH,
-//     newSearch: true
-//   };
-// }
-
 export function setPopularType(selectPopularType) {
   return {
     type: types.SET_POPULAR_TYPE,
@@ -31,24 +24,24 @@ export function selectQuestionName(selectQuestionName) {
   };
 }
 
-export function getAuthorName(authorId) {
-  return {
-    type: types.SET_AUTHOR_NAME,
-    authorName: "Donald Trump"
-  };
+// export function getAuthorName(authorId) {
+//   return {
+//     type: types.SET_AUTHOR_DATA,
+//     authorName: "Donald Trump"
+//   };
 
-  //return (dispatch, getState) => {
-  //const currentAuthor = searchSelectors.getSearchText(getState());
-  //display_name
-  // SearchService.getAuthoInfo(authorId).then(response => {
-  //   debugger;
-  //   dispatch({
-  //     type: types.SET_AUTHOR_NAME,
-  //     authorName: response.data.items[0].display_name
-  //   });
-  // });
-  //};
-}
+//return (dispatch, getState) => {
+//const currentAuthor = searchSelectors.getSearchText(getState());
+//display_name
+// SearchService.getAuthoInfo(authorId).then(response => {
+//   debugger;
+//   dispatch({
+//     type: types.SET_AUTHOR_DATA,
+//     authorName: response.data.items[0].display_name
+//   });
+// });
+//};
+//}
 
 export function loadMoreQuestionInfo() {
   return (dispatch, getState) => {
@@ -60,7 +53,6 @@ export function loadMoreQuestionInfo() {
       page: currentMeta.page + 1
     };
 
-    debugger;
     dispatch({
       type: types.SEARCH_META_INFO_QUESTION_INFO,
       searchMetaInfoQuestionInfo: newMeta
