@@ -89,11 +89,10 @@ export default class ResultScreen extends Component {
 
   clickAuthor(authorId) {
     this.props.selectAuthor(authorId);
-    console.log(authorId);
   }
 
-  onTagClick(tag) {
-    console.log(tag);
+  onTagClick(tagName) {
+    this.props.selectTag(tagName);
   }
 
   getUserName(userId) {
@@ -101,6 +100,7 @@ export default class ResultScreen extends Component {
   }
 
   showQuestionInfo() {
+    console.log("qls");
     this.props.showQuestionInfo;
     this.props.showPopularAnswers();
   }

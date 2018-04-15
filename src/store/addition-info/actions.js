@@ -52,10 +52,24 @@ export function getAuthorName(authorId) {
   //};
 }
 
-export function showQuestonInfo() {
+// export function isShowQuestonInfo() {
+//   return {
+//     type: types.SELECT_AUTHOR,
+//     isShowQuestionInfo: false
+//   };
+// }
+
+export function isShowQuestonInfo(isShow) {
   return {
-    type: types.SELECT_AUTHOR,
-    isShowQuestionInfo: true
+    type: types.SHOW_QUESTION_INFO,
+    isShowQuestionInfo: isShow
+  };
+}
+
+export function isShowAdditionInfo(isShow) {
+  return {
+    type: types.SHOW_ADDITION_INFO,
+    isShowAdditionInfo: isShow
   };
 }
 

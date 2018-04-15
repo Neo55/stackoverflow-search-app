@@ -34,7 +34,6 @@
     "prettier-eslint": "^8.8.1",
     "react": "^16.3.1",
     "react-autobind": "^1.0.6",
-    "react-crouton": "^1.0.0",
     "react-dom": "^16.3.1",
     "react-hot-loader": "^4.0.1",
     "redux-thunk": "^2.2.0",

@@ -1,17 +1,18 @@
 import React, { Component } from "react";
-import QuestionInfo from "../../components/question-info/QuestionInfo";
+import AdditionInfo from "../../components/addition-info/AdditionInfo";
 import * as additionInfoActions from "../../store/addition-info/actions";
 import { Input, Button } from "mdbreact";
 import autoBind from "react-autobind";
 import { connect } from "react-redux";
 import { Animated } from "react-animated-css";
-import "./QuestionInfoScreen.scss";
+import "./AdditionInfoScreen.scss";
 
-class QuestionInfoScreen extends Component {
+class AdditionInfoScreen extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
   }
+  debugger;
   render() {
     return (
       <Animated
@@ -19,27 +20,26 @@ class QuestionInfoScreen extends Component {
         animationOut="zoomOutDown"
         isVisible={true}
       >
-        <QuestionInfo
-          showQuestionInfo={this.props.isShowQuestionInfo}
-          popularAnswers={this.props.popularAnswers}
-          questionTitle={this.props.questionTitle}
-          hideQuestionInfo={this.hideQuestionInfo}
+        <AdditionInfo
+          popularQuestion={this.props.popularQuestion}
+          hideAdditionInfo={this.hideAdditionInfo}
+          showAdditionInfo={this.props.isShowAdditionInfo}
         />
       </Animated>
     );
   }
 
-  hideQuestionInfo() {
+  hideAdditionInfo() {
     debugger;
-    this.props.dispatch(additionInfoActions.isShowQuestonInfo(false));
+    this.props.dispatch(additionInfoActions.isShowAdditionInfo(false));
   }
 }
 
 function mapStateToProps(state) {
   return {
-    isShowQuestionInfo: state.additionInfo.isShowQuestionInfo,
+    isShowAdditionInfo: state.additionInfo.isShowAdditionInfo,
     popularAnswers: state.additionInfo.popularAnswers
   };
 }
 
-export default connect(mapStateToProps)(QuestionInfoScreen);
+export default connect(mapStateToProps)(AdditionInfoScreen);

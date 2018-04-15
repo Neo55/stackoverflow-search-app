@@ -3,6 +3,7 @@ import SearchBox from "../../components/search-box/SearchBox";
 import ResultList from "../../components/result/ResultList";
 import AdditionInfo from "../../components/addition-info/AdditionInfo";
 import QuestionInfoScreen from "../question-info-screen/QuestionInfoScreen";
+import AdditionInfoScreen from "../additionInfoScreen/AdditionInfoScreen";
 import { Input, Button } from "mdbreact";
 import * as searchActions from "../../store/search/actions";
 import * as additionInfoActions from "../../store/addition-info/actions";
@@ -10,6 +11,7 @@ import autoBind from "react-autobind";
 import { connect } from "react-redux";
 import { Animated } from "react-animated-css";
 import "./ResultScreen.scss";
+import { runInThisContext } from "vm";
 
 class ResultScreen extends Component {
   constructor(props) {
@@ -56,6 +58,7 @@ class ResultScreen extends Component {
                 <ResultList
                   result={this.props.result}
                   selectAuthor={this.selectCurrentAuthor}
+                  selectTag={this.selectCurrentTag}
                   showPopularAnswers={this.loadPopularAnswer}
                   getUserName={this.getUserNameById}
                   authorName="name"
@@ -69,8 +72,12 @@ class ResultScreen extends Component {
               animationIn="slideInRight"
               animationOut="tada"
               //isVisible={this.isVisibleResultTable()}
+              isVisible={false}
             >
-              <AdditionInfo popularQuestion={this.props.popularQuestion} />
+              <AdditionInfoScreen
+                popularQuestion={this.props.popularQuestion}
+              />
+              {/* <AdditionInfo popularQuestion={this.props.popularQuestion} /> */}
             </Animated>
           </div>
         </div>
@@ -78,13 +85,8 @@ class ResultScreen extends Component {
     );
   }
 
-  isVisibleResultTable() {
-    return this.props.result.length === 0;
-  }
-
   onStartSearch(searchText, context) {
     this.props.history.push("/result");
-
     this.props.dispatch(searchActions.startSearch());
   }
 
@@ -94,15 +96,22 @@ class ResultScreen extends Component {
 
   selectCurrentAuthor(authorId) {
     this.props.dispatch(searchActions.searchPopularQuestionByAuthor(authorId));
+    this.props.dispatch(additionInfoActions.isShowAdditionInfo(true));
+  }
+
+  selectCurrentTag(tagName) {
+    this.props.dispatch(searchActions.searchPopularQuestionByTag(tagName));
+    this.props.dispatch(additionInfoActions.isShowAdditionInfo(true));
   }
 
   loadPopularAnswer() {
     this.props.dispatch(additionInfoActions.getPopularQuestionAnswer());
+    this.props.dispatch(additionInfoActions.isShowQuestonInfo(true));
   }
 
   getUserNameById(userId) {
     this.props.dispatch(additionInfoActions.getAuthorName(userId));
-    //debugger;
+
     return this.state;
   }
 }
@@ -116,7 +125,6 @@ function mapStateToProps(state) {
     selectPopularType: state.search.selectPopularType,
     popularSelectName: state.search.popularSelectName,
     authorName: state.search.authorName,
-    isShowQuestionInfo: state.search.isShowQuestionInfo,
     popularAnswers: state.additionInfo.popularAnswers
   };
 }

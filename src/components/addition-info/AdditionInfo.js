@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Table, Badge, Spinner, Button, Fa } from "mdbreact";
 import autoBind from "react-autobind";
-import Crouton from "react-crouton";
 import "./AdditionInfo.scss";
 
 export default class AdditionInfo extends Component {
@@ -11,37 +10,21 @@ export default class AdditionInfo extends Component {
   }
 
   render() {
-    var data = {
-      id: Date.now(),
-      type: "error",
-      message: "Hello React-Crouton",
-      autoMiss: true || false,
-      //onDismiss: listener,
-      buttons: [
-        {
-          name: "close"
-          // listener: function() {}
-        }
-      ],
-      hidden: this.props.popularQuestion.length === 0,
-      timeout: 2000
-    };
     return (
-      <div className="addition-info">
-        {/* <Crouton
-          id={data.id}
-          type={data.type}
-          message={data.message}
-          //onDismiss={data.onDismiss}
-          buttons={data.buttons}
-          hidden={data.hidden}
-          timeout={data.timeout}
-          autoMiss={data.autoMiss}
-        > */}
+      <div
+        className="addition-info"
+        style={{
+          visibility: !this.props.showAdditionInfo ? "hidden" : "visible"
+        }}
+      >
         <div className="title addition-table">
           <div className="row">
             <div className="col-md-2 close-icon-col">
-              <Fa icon="close" className="mr-1 close-icon" />
+              <Fa
+                onClick={e => this.closeAdditionInfo()}
+                icon="close"
+                className="mr-1 close-icon"
+              />
             </div>
             <div className="col-md-10">
               <p>
@@ -76,12 +59,15 @@ export default class AdditionInfo extends Component {
             ))}
           </tbody>
         </Table>
-        {/* </Crouton> */}
       </div>
     );
   }
 
   renderLoading() {
     return <Spinner big multicolor />;
+  }
+
+  closeAdditionInfo() {
+    this.props.hideAdditionInfo();
   }
 }

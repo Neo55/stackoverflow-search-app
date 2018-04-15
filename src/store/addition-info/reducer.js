@@ -6,6 +6,7 @@ const initialState = Immutable({
   popularSelectName: "",
   authorName: "",
   isShowQuestionInfo: false,
+  isShowAdditionInfo: false,
   popularAnswers: []
 });
 
@@ -30,6 +31,11 @@ export default function reduce(state = initialState, action = {}) {
       //console.log(action.popularQuestionByTag);
       return state.merge({
         isShowQuestionInfo: action.isShowQuestionInfo
+      });
+    case types.SHOW_ADDITION_INFO:
+      //console.log(action.popularQuestionByTag);
+      return state.merge({
+        isShowAdditionInfo: action.isShowAdditionInfo
       });
     case types.GET_POPULAR_ANSWERS:
       //console.log(action.popularQuestionByTag);
