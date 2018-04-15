@@ -12,6 +12,13 @@
     color: #ffffff;
     font-weight: 300;
     text-align: center;
+    padding: 5px;
+    .col-md-2.close-icon-col {
+      text-align: right;
+      .mr-1.close-icon {
+        cursor: pointer;
+      }
+    }
   }
   .table.table-striped {
     thead tr {

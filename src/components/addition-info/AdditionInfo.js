@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Badge, Spinner } from "mdbreact";
+import { Table, Badge, Spinner, Button, Fa } from "mdbreact";
 import autoBind from "react-autobind";
 import Crouton from "react-crouton";
 import "./AdditionInfo.scss";
@@ -39,10 +39,17 @@ export default class AdditionInfo extends Component {
           autoMiss={data.autoMiss}
         > */}
         <div className="title addition-table">
-          <p>
-            Самые популярные вопросы по {this.props.selectPopularType}:{" "}
-            {this.props.popularSelectName}{" "}
-          </p>
+          <div className="row">
+            <div className="col-md-2 close-icon-col">
+              <Fa icon="close" className="mr-1 close-icon" />
+            </div>
+            <div className="col-md-10">
+              <p>
+                Самые популярные вопросы по {this.props.selectPopularType}:{" "}
+                {this.props.popularSelectName}{" "}
+              </p>
+            </div>
+          </div>
         </div>
 
         <Table className="table table-striped">

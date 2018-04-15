@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import autoBind from "react-autobind";
-import { Table, Badge, Spinner } from "mdbreact";
+import { Table, Badge, Spinner, Fa } from "mdbreact";
 import Crouton from "react-crouton";
 import "./QuestionInfo.scss";
 
@@ -41,11 +41,17 @@ export default class QuestionInfo extends Component {
         > */}
         {/* <p>Самые ответы на вопрос: {this.props.questionTitle} </p> */}
         <div className="title question-info-table">
-          <p>
-            Самые популярные вопросы по
-            {/* {this.props.selectPopularType}:{" "} */}
-            {/* {this.props.popularSelectName}{" "} */}
-          </p>
+          <div className="row">
+            <div className="col-md-10">
+              <p>
+                Самые популярные вопросы по {this.props.selectPopularType}:{" "}
+                {this.props.popularSelectName}{" "}
+              </p>
+            </div>
+            <div className="col-md-2 close-icon-col">
+              <Fa icon="close" className="mr-1 close-icon" />
+            </div>
+          </div>
         </div>
         <Table className="table table-striped">
           <thead>
