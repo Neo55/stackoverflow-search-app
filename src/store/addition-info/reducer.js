@@ -14,7 +14,9 @@ const initialState = Immutable({
   popularAnswers: [],
   searchMetaInfoQuestionInfo: {
     page: 1
-  }
+  },
+  selectQuestionId: "",
+  hasNextQuestionAnswers: false
 });
 
 export default function reduce(state = initialState, action = {}) {
@@ -30,6 +32,10 @@ export default function reduce(state = initialState, action = {}) {
     case types.SET_AUTHOR_DATA:
       return state.merge({
         authorData: action.authorData
+      });
+    case types.GET_SELECT_QUESTION_ID:
+      return state.merge({
+        selectQuestionId: action.selectQuestionId
       });
     case types.SHOW_QUESTION_INFO:
       return state.merge({
@@ -51,6 +57,10 @@ export default function reduce(state = initialState, action = {}) {
       return state.merge({
         searchMetaInfoQuestionInfo: action.searchMetaInfoQuestionInfo
       });
+    case types.HAS_NEXT_QUESTION_ANSWER:
+      return state.merge({
+        hasNextQuestionAnswers: action.hasNextQuestionAnswers
+      });
   }
   return state;
 }
@@ -69,4 +79,8 @@ export function getSelectPopularType(state) {
 
 export function getSelectPopularName(state) {
   return state.additionInfo.popularSelectName;
+}
+
+export function getSelectQuestionId(state) {
+  return state.additionInfo.selectQuestionId;
 }

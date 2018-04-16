@@ -5,8 +5,8 @@ const initialState = Immutable({
   text: "",
   result: [],
   popularQuestion: [],
-  // currentAuthor: "",
-  // currentTag: "",
+  hasNextAdditionInfo: false,
+  hasNextResult: false,
   searchMetaInfo: {
     page: 1
   },
@@ -19,7 +19,6 @@ export default function reduce(state = initialState, action = {}) {
   switch (action.type) {
     case types.GET_POPULAR_QUESTION_BY_AUTHOR:
     case types.GET_POPULAR_QUESTION_BY_TAG:
-      debugger;
       return state.merge({
         popularQuestion: action.popularQuestion
       });
@@ -31,15 +30,14 @@ export default function reduce(state = initialState, action = {}) {
       return state.merge({
         text: action.text
       });
-    // case types.SELECT_AUTHOR:
-    //   return state.merge({
-    //     currentAuthor: action.currentAuthor
-    //   });
-    // case types.SELECT_TAG:
-    //   debugger;
-    //   return state.merge({
-    //     currentTag: action.currentTag
-    //   });
+    case types.HAS_NEXT_RESULT:
+      return state.merge({
+        hasNextResult: action.hasNextResult
+      });
+    case types.HAS_NEXT_ADDITION_INFO:
+      return state.merge({
+        hasNextAdditionInfo: action.hasNextAdditionInfo
+      });
     case types.SEARCH_META_INFO:
       return state.merge({
         searchMetaInfo: action.searchMetaInfo
@@ -55,15 +53,6 @@ export default function reduce(state = initialState, action = {}) {
 export function getSearchText(state) {
   return state.search.text;
 }
-
-// export function getCurrentAuthor(state) {
-//   return state.search.currentAuthor;
-// }
-
-// export function getCurrentTag(state) {
-//   debugger;
-//   return state.search.currentTag;
-// }
 
 export function getMeta(state) {
   return state.search.searchMetaInfo;

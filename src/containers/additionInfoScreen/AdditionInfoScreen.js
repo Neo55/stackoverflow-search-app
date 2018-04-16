@@ -27,6 +27,9 @@ class AdditionInfoScreen extends Component {
           selectPopularType={this.props.selectPopularType}
           popularSelectName={this.props.popularSelectName}
           loadMoreAdditionInfo={this.loadMoreAdditionInfo}
+          hasNextAdditionInfo={
+            this.props.hasNextAdditionInfo && this.props.isShowAdditionInfo
+          }
         />
       </Animated>
     );
@@ -46,7 +49,8 @@ function mapStateToProps(state) {
     isShowAdditionInfo: state.additionInfo.isShowAdditionInfo,
     popularAnswers: state.additionInfo.popularAnswers,
     selectPopularType: state.additionInfo.selectPopularType,
-    popularSelectName: state.additionInfo.popularSelectName
+    popularSelectName: state.additionInfo.popularSelectName,
+    hasNextAdditionInfo: state.search.hasNextAdditionInfo
   };
 }
 

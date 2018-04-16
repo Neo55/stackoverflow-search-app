@@ -47,7 +47,9 @@ export default class ResultScreen extends Component {
               <td>
                 <div
                   className="div coursor"
-                  onClick={e => this.showQuestionInfo(item.title)}
+                  onClick={e =>
+                    this.showQuestionInfo(item.title, item.question_id)
+                  }
                 >
                   {item.title}
                 </div>
@@ -55,7 +57,9 @@ export default class ResultScreen extends Component {
               <td style={{ textAlign: "center" }}>
                 <div
                   className="div coursor"
-                  onClick={e => this.showQuestionInfo(item.title)}
+                  onClick={e =>
+                    this.showQuestionInfo(item.title, item.question_id)
+                  }
                 >
                   {item.answer_count}
                 </div>
@@ -93,8 +97,8 @@ export default class ResultScreen extends Component {
     this.props.selectTag(tagName);
   }
 
-  showQuestionInfo(title) {
+  showQuestionInfo(title, questionId) {
     this.props.showQuestionInfo;
-    this.props.showPopularAnswers(title);
+    this.props.showPopularAnswers(title, questionId);
   }
 }

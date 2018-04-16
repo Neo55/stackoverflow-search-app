@@ -13,18 +13,18 @@ export default class SearchBox extends Component {
   render() {
     return (
       <div className="row search-box">
-        <div className="col-md-8 ">
+        <div className="col-md-9 ">
           <Input
             id="search-input"
             onKeyPress={this.handleKeyPress}
-            label="Введите текст для поиска"
+            label="Введите текст для поиска по сайту stackoverflow"
             defaultValue={this.props.searchText}
             onChange={this.onSearchInputChange}
             icon="search"
             className="input search"
           />
         </div>
-        <div className="col-md-4 button search">
+        <div className="col-md-3 button search">
           <Button
             color="primary"
             className="button search"

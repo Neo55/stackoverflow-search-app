@@ -22,10 +22,12 @@ class QuestionInfoScreen extends Component {
         <QuestionInfo
           showQuestionInfo={this.props.isShowQuestionInfo}
           popularAnswers={this.props.popularAnswers}
-          questionTitle={this.props.questionTitle}
           hideQuestionInfo={this.hideQuestionInfo}
           selectQuestionName={this.props.selectQuestionName}
           loadMoreQuestionInfo={this.loadMoreQuestionInfo}
+          hasNextQuestionAnswers={
+            this.props.hasNextQuestionAnswers && this.props.isShowQuestionInfo
+          }
         />
       </Animated>
     );
@@ -44,7 +46,7 @@ function mapStateToProps(state) {
   return {
     isShowQuestionInfo: state.additionInfo.isShowQuestionInfo,
     popularAnswers: state.additionInfo.popularAnswers,
-    selectQuestionName: state.additionInfo.selectQuestionName
+    hasNextQuestionAnswers: state.additionInfo.hasNextQuestionAnswers
   };
 }
 

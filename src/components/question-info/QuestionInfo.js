@@ -20,7 +20,7 @@ export default class QuestionInfo extends Component {
         <div className="title question-info-table">
           <div className="row">
             <div className="col-md-11">
-              <p>{this.props.selectQuestionName}?</p>
+              <p>{this.props.selectQuestionName}</p>
             </div>
             <div className="col-md-1 close-icon-col">
               <Fa
@@ -43,8 +43,8 @@ export default class QuestionInfo extends Component {
           <tbody>
             {this.props.popularAnswers.map(item => (
               <tr key={item.answer_id}>
-                <td>{item.owner.user_id}</td>
-                <td>{item.answer_count}</td>
+                <td>{item.owner.display_name}</td>
+                <td>{item.body}</td>
               </tr>
             ))}
           </tbody>
@@ -54,6 +54,11 @@ export default class QuestionInfo extends Component {
           outline
           color="success"
           onClick={e => this.onClickLoadMoreQuestionInfo()}
+          style={{
+            display: !this.props.hasNextQuestionAnswers
+              ? "none"
+              : "inline-block"
+          }}
         >
           Загрузить еще
         </Button>

@@ -26,7 +26,7 @@ class ResultScreen extends Component {
             <QuestionInfoScreen
               className="question-info-screen"
               popularAnswers={this.props.popularAnswers}
-              questionTitle={this.props}
+              selectQuestionName={this.props.selectQuestionName}
             />
           </div>
           <div className="search col-md-6">
@@ -61,7 +61,6 @@ class ResultScreen extends Component {
                   selectAuthor={this.selectCurrentAuthor}
                   selectTag={this.selectCurrentTag}
                   showPopularAnswers={this.loadPopularAnswer}
-                  //  getUserName={this.getUserNameById}
                   authorName="name"
                   showQuestionInfo="false"
                 />
@@ -70,6 +69,9 @@ class ResultScreen extends Component {
                   onClick={e => this.onClickLoadMoreResult()}
                   outline
                   color="success"
+                  style={{
+                    display: !this.props.hasNextResult ? "none" : "inline-block"
+                  }}
                 >
                   Загрузить еще
                 </Button>
@@ -94,9 +96,9 @@ class ResultScreen extends Component {
     );
   }
 
-  onStartSearch(searchText, context) {
+  onStartSearch() {
     this.props.history.push("/result");
-    this.props.dispatch(searchActions.startSearch());
+    this.props.dispatch(searchActions.startSearch(this.props.text));
   }
 
   onSearchTextChange(text) {
@@ -119,10 +121,13 @@ class ResultScreen extends Component {
     this.props.dispatch(searchActions.searchPopularQuestionByTag(tagName));
   }
 
-  loadPopularAnswer(title) {
+  loadPopularAnswer(title, questionId) {
     this.props.dispatch(additionInfoActions.selectQuestionName(title));
-    this.props.dispatch(additionInfoActions.getPopularQuestionAnswer());
     this.props.dispatch(additionInfoActions.isShowQuestonInfo(true));
+    this.props.dispatch(additionInfoActions.selectQuestionId(questionId));
+    this.props.dispatch(
+      additionInfoActions.getPopularQuestionAnswer(questionId)
+    );
   }
 
   onClickLoadMoreResult() {
@@ -138,8 +143,10 @@ function mapStateToProps(state) {
     currentAuthor: state.search.currentAuthor,
     selectPopularType: state.search.selectPopularType,
     popularSelectName: state.search.popularSelectName,
+    hasNextResult: state.search.hasNextResult,
     authorData: state.search.authorData,
-    popularAnswers: state.additionInfo.popularAnswers
+    popularAnswers: state.additionInfo.popularAnswers,
+    selectQuestionName: state.additionInfo.selectQuestionName
   };
 }
 

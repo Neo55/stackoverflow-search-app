@@ -21,6 +21,8 @@
     }
   }
   .table.table-striped {
+    table-layout: fixed;
+    word-wrap: break-word;
     thead tr {
       text-align: center;
     }

@@ -59,6 +59,9 @@ export default class AdditionInfo extends Component {
           outline
           color="success"
           onClick={e => this.onClickLoadMoreAdditionInfo()}
+          style={{
+            display: !this.props.hasNextAdditionInfo ? "none" : "inline-block"
+          }}
         >
           Загрузить еще
         </Button>
